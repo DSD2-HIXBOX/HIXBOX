@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#251819">
+  <title>화재 대피 시뮬레이션</title>
+</head>
+<body>
+  <canvas id="scene" aria-label="학교 내부 3D 탐색 화면"></canvas>
+  <main id="menu">
+    <div class="start-card">
+      <h1>화재 대피</h1>
+      <p id="load-status" role="status">학교 공간을 불러오는 중…</p>
+      <button id="start" disabled>시작하기</button>
+      <button id="restart" hidden>처음부터</button>
+      <button id="fullscreen">전체 화면</button>
+      <a href="./">학교 탐색으로</a>
+    </div>
+  </main>
+  <div id="hud" hidden>
+    <section class="progress" aria-label="진행 상황">
+      <div class="progress-top"><span id="step-number">01 / 10</span><div id="progress-bar" aria-hidden="true"></div></div>
+      <strong id="step-title">화재 발생</strong>
+    </section>
+    <div id="alert" class="alert" role="status" aria-atomic="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path id="alert-icon"></path></svg>
+      <span id="alert-text"></span>
+    </div>
+    <div id="crosshair" aria-hidden="true"></div>
+    <div id="choices" class="choices" role="group" aria-label="행동 선택" inert>
+      <button type="button" data-choice="1"></button>
+      <button type="button" data-choice="2"></button>
+    </div>
+    <div class="bottom">
+      <p id="hint" role="status"></p>
+      <p class="controls"><kbd>WASD</kbd> 이동 · 마우스 시점 · <kbd>E</kbd> 상호작용 · <kbd>R</kbd> 재시작 · <kbd>Esc</kbd> 메뉴</p>
+    </div>
+  </div>
+  <script type="module" src="/src/story/FireEscapeMain.js"></script>
+</body>
+</html>
