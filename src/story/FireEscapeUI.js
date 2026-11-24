@@ -12,6 +12,7 @@ export class FireEscapeUI {
     this.alertText = document.querySelector('#alert-text');
     this.icon = document.querySelector('#alert-icon');
     this.crosshair = document.querySelector('#crosshair');
+    this.feedback = document.querySelector('#action-feedback');
     const progress = document.querySelector('#progress-bar');
     this.segments = Array.from({length: 10}, () => progress.appendChild(document.createElement('span')));
     this.reset();
@@ -22,6 +23,19 @@ export class FireEscapeUI {
     this.alertKey = '';
     this.step = 0;
     this.alert.classList.remove('visible');
+    this.clearFeedback();
+  }
+
+  showBelongingFeedback(elapsed) {
+    this.feedbackUntil = elapsed + 5;
+    this.feedback.hidden = false;
+    this.feedback.textContent = '화재가 났을 때는 소지품을 챙기지 말고 두고 대피해요.';
+  }
+
+  clearFeedback() {
+    this.feedbackUntil = 0;
+    this.feedback.hidden = true;
+    this.feedback.textContent = '';
   }
 
   update(story, target) {
@@ -53,5 +67,6 @@ export class FireEscapeUI {
       } else setAlert();
     }
     this.crosshair.classList.toggle('aimed', Boolean(target));
+    if (!this.feedback.hidden && story.elapsed >= this.feedbackUntil) this.clearFeedback();
   }
 }

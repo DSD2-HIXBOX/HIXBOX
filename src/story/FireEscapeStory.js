@@ -24,7 +24,11 @@ export class FireEscapeStory {
     return true;
   }
 
-  update(dt, {nearDoor, lookingAtWindow, lowReady, announcementPlaying = false}) {
+  get canSelectBelongings() {
+    return this.alarm && this.step <= 2;
+  }
+
+  update(dt, {nearDoor, doorOpened = false, lookingAtWindow, lowReady, announcementPlaying = false}) {
     this.elapsed += dt;
     if (this.alarm) this.smokeSeconds += dt;
     if (this.step === 1) {
@@ -33,7 +37,7 @@ export class FireEscapeStory {
         this.announced = true;
         this.step = 2;
       }
-    } else if (this.step === 2 && nearDoor) {
+    } else if (this.step === 2 && (nearDoor || doorOpened)) {
       this.step = 3;
     } else if (this.step === 3) {
       this.windowFocus = lookingAtWindow ? Math.min(WINDOW_SECONDS, this.windowFocus + dt) : 0;

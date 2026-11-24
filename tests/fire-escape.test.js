@@ -13,8 +13,10 @@ test('alarm and announcement precede free movement to the door', () => {
   const story = new FireEscapeStory();
   story.update(INTRO_SECONDS - 1, arrival);
   assert.equal(story.alarm, false);
+  assert.equal(story.canSelectBelongings, false);
   story.update(1, arrival);
   assert.equal(story.alarm, true);
+  assert.equal(story.canSelectBelongings, true);
   assert.equal(story.lower(), false);
   story.update(ANNOUNCEMENT_SECONDS, {...arrival, announcementPlaying: true});
   assert.equal(story.step, 1);
@@ -22,8 +24,9 @@ test('alarm and announcement precede free movement to the door', () => {
   assert.equal(story.step, 2);
   story.update(2, noInput);
   assert.equal(story.step, 2);
-  story.update(.1, arrival);
+  story.update(.1, {...noInput, doorOpened: true});
   assert.equal(story.step, 3);
+  assert.equal(story.canSelectBelongings, false);
 });
 
 test('window needs uninterrupted gaze; the low posture completes step 04 and reset clears the session', () => {

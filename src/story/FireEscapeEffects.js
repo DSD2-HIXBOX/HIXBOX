@@ -162,6 +162,7 @@ export class FireEscapeEffects {
       {object: book, outline: rectangle(.246, .207, 0xd6eaff), height: .045},
       {object: bag, outline: rectangle(.264, .255, 0xd6eaff), height: .13},
     ];
+    this.belongingTargets = this.belongingOutlines.flatMap(({object}) => [...object.children]);
     for (const {object, outline, height} of this.belongingOutlines) {
       outline.position.y = height;
       outline.rotation.x = -Math.PI / 2;
@@ -236,8 +237,8 @@ export class FireEscapeEffects {
   update(story, camera, dt) {
     const time = story.smokeSeconds;
     const shimmer = .78 + .18 * Math.sin(story.elapsed * 3);
-    this.doorOutline.visible = (story.step === 2 || story.step === 3) && this.door.progress < .8;
-    for (const {outline} of this.belongingOutlines) outline.visible = story.step === 2;
+    this.doorOutline.visible = story.alarm && story.step <= 3 && this.door.progress < .8;
+    for (const {outline} of this.belongingOutlines) outline.visible = story.canSelectBelongings;
     this.windowOutline.visible = story.step === 3;
     this.markers.forEach(({outline, sparkle}, index) => {
       const pulse = Math.max(0, Math.sin(story.elapsed * 2.7 + index * 2)) ** 3;

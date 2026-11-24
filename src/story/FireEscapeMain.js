@@ -24,13 +24,19 @@ async function main() {
   const effects = new FireEscapeEffects(scene, classroomDoor);
   const ui = new FireEscapeUI();
   const smoothEye = new SmoothEye(STANDING_EYE);
-  const interaction = new ExploreInteraction(world.interactionWorld, () => {});
+  const doorTargets = world.interactionWorld.targets;
+  const allTargets = [...doorTargets, ...effects.belongingTargets];
+  const interactionWorld = {...world.interactionWorld};
+  const interaction = new ExploreInteraction(interactionWorld, () => {});
+  for (const {object} of effects.belongingOutlines) {
+    object.userData.interaction = '소지품';
+    object.userData.onInteract = () => ui.showBelongingFeedback(story.elapsed);
+  }
   const ray = new THREE.Ray();
   const point = new THREE.Vector3();
   const wallCheck = new THREE.Raycaster();
   let started = false;
   let playing = false;
-  let doorTarget = null;
   let previousTime = 0;
 
   const posture = {
@@ -78,7 +84,6 @@ async function main() {
     pc.yaw = 0;
     pc.pitch = 0;
     pc.applyView();
-    doorTarget = null;
   }
 
   function begin() {
@@ -99,9 +104,18 @@ async function main() {
     });
   }
 
+  function aimedTarget() {
+    if (!story.alarm) return null;
+    interactionWorld.targets = story.canSelectBelongings ? allTargets : doorTargets;
+    camera.updateWorldMatrix(true, false);
+    return interaction.fromCamera(camera);
+  }
+
   pc.onPrimary = () => {
-    if (story.step >= 2 && doorTarget) {
-      interaction.activate(doorTarget);
+    const target = playing && aimedTarget();
+    if (target) {
+      if (doorTargets.includes(target)) ui.clearFeedback();
+      interaction.activate(target);
       audio.select();
     }
     return true;
@@ -180,13 +194,12 @@ async function main() {
         Math.hypot(rig.position.x - classroomDoor.openingCenter.x, rig.position.z - classroomDoor.openingCenter.z) < 1.8;
       const alarmWasOn = story.alarm;
       story.update(elapsed, {
-        nearDoor, lookingAtWindow, announcementPlaying: audio.announcing,
+        nearDoor, doorOpened: classroomDoor.open, lookingAtWindow, announcementPlaying: audio.announcing,
         lowReady: collision.height <= LOW_HEIGHT && Math.abs(camera.position.y - LOW_EYE) < .025,
       });
       if (!alarmWasOn && story.alarm) audio.playAlarm();
-      doorTarget = story.step >= 2 ? interaction.fromCamera(camera) : null;
       effects.update(story, camera, elapsed);
-      ui.update(story, lookingAtWindow || doorTarget);
+      ui.update(story, lookingAtWindow || aimedTarget());
       world.doors.update(dt, rig.position);
     }
     world.render(dt);
