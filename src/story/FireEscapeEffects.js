@@ -136,14 +136,17 @@ export class FireEscapeEffects {
     const desktopHeight = 6.637;
     this.belongings.position.set(35.25, desktopHeight + .007, -8.13);
     const book = new THREE.Group();
-    book.position.set(-.14, 0, .015);
+    book.position.set(-.305, 0, .015);
     book.rotation.y = -.16;
+    book.scale.set(1.38, 1.2, 1.24);
     boxPiece(book, [.22, .034, .18], [0, .017, 0], 0xe6ddbd);
     for (const y of [.004, .034]) boxPiece(book, [.232, .008, .19], [0, y, 0], 0x507eb4);
     boxPiece(book, [.10, .002, .044], [0, .039, -.025], 0xaed6ed);
     const bag = new THREE.Group();
-    bag.position.set(.12, 0, -.015);
-    bag.rotation.y = .24;
+    const bagScale = 1.52;
+    bag.position.set(.055, .115 * bagScale, -.02);
+    bag.rotation.set(Math.PI / 2, -.14, 0, 'YXZ');
+    bag.scale.setScalar(bagScale);
     const shell = new THREE.Mesh(
       new RoundedBoxGeometry(.242, .122, .23, 3, .046),
       new THREE.MeshStandardMaterial({color: 0x8c5277, roughness: .93}),
