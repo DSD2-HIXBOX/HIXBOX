@@ -43,7 +43,7 @@ async function main() {
     crouched: false,
     updatePC() {},
     toggle() {
-      if (playing && story.lower()) audio.select();
+      if (playing && story.lower(classroomDoor.open)) audio.select();
     },
   };
 
@@ -114,9 +114,11 @@ async function main() {
   pc.onPrimary = () => {
     const target = playing && aimedTarget();
     if (target) {
-      if (doorTargets.includes(target)) ui.clearFeedback();
+      const selectedDoor = doorTargets.includes(target);
+      if (selectedDoor) ui.clearFeedback();
       interaction.activate(target);
       audio.select();
+      if (selectedDoor && pc.keys.has('KeyC')) story.lower(classroomDoor.open);
     }
     return true;
   };

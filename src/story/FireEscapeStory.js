@@ -18,8 +18,8 @@ export class FireEscapeStory {
     this.lowering = false;
   }
 
-  lower() {
-    if (this.step !== 4 || this.lowering) return false;
+  lower(doorOpened = false) {
+    if (this.lowering || (this.step !== 4 && !(this.alarm && doorOpened))) return false;
     this.lowering = true;
     return true;
   }

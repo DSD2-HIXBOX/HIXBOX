@@ -54,6 +54,22 @@ test('window needs uninterrupted gaze; the low posture completes step 04 and res
   assert.deepEqual(story, new FireEscapeStory());
 });
 
+test('opening the classroom door during the alarm permits early low posture without skipping steps', () => {
+  const story = new FireEscapeStory();
+  assert.equal(story.lower(true), false);
+  story.update(INTRO_SECONDS, noInput);
+  assert.equal(story.lower(false), false);
+  assert.equal(story.lower(true), true);
+  story.update(ANNOUNCEMENT_SECONDS, lowered);
+  story.update(.1, {...lowered, doorOpened: true});
+  assert.equal(story.step, 3);
+  assert.equal(story.completed, false);
+  story.update(WINDOW_SECONDS, {...lowered, lookingAtWindow: true});
+  story.update(.1, lowered);
+  assert.equal(story.lowering, true);
+  assert.equal(story.completed, true);
+});
+
 test('collision loader accepts both gzip payloads and HTTP-decoded triangles', () => {
   const triangles = new Float32Array([0, 0, 0, 1, 0, 0, 0, 0, 1]);
   const plain = new Uint8Array(triangles.buffer);
