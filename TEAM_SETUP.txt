@@ -1,0 +1,22 @@
+팀원 연결 안내
+
+1. Git, Git LFS, Node.js 22.12 이상을 설치하세요.
+2. 다음 명령으로 전체 프로젝트와 모델을 받으세요.
+
+   git lfs install
+   git clone https://github.com/DSD2-HIXBOX/HIXBOX.git
+   cd HIXBOX
+   git lfs pull
+   npm ci
+   npm run dev
+
+3. Codex에서 HIXBOX 폴더를 프로젝트로 여세요.
+4. 수정 전 git pull을 실행하고, 팀원별 작업 브랜치를 만들어 작업하세요.
+
+   git switch -c codex/작업이름
+
+5. 모델이 열리지 않으면 git lfs pull을 다시 실행하세요. GitHub Download ZIP만으로는 LFS 모델이 포함되지 않을 수 있습니다.
+6. 기존 검사에 중간 모델이 필요하면 npm run prepare:explore 후 npm test를 실행하세요.
+
+공개 저장소는 누구나 읽을 수 있지만, 수정 내용을 올리려면 소유자가 협업 권한을 줘야 합니다.
+웹사이트 배포는 별도입니다. 이 저장소는 편집 프로젝트와 LFS 모델을 보관합니다.

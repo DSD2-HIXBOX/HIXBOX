@@ -1,0 +1,416 @@
+{
+  "referenceFloorMaterial": 254,
+  "thirdFloorHeight": 8.7996,
+  "thirdFloorTriangles": 11226,
+  "firstFloorRemovedNodes": [
+    18941,
+    20427,
+    20428,
+    20429,
+    20430,
+    20431,
+    20432,
+    20433,
+    20434,
+    20570,
+    20571,
+    20572,
+    20573,
+    20574,
+    20575,
+    20576,
+    20577,
+    20578,
+    20579,
+    20580,
+    20581,
+    20582,
+    20583,
+    20584,
+    20585,
+    20586,
+    20587,
+    20588,
+    20589,
+    20590,
+    20591,
+    20592,
+    20593,
+    20594,
+    20595,
+    20596,
+    20597,
+    20598,
+    20599,
+    20600,
+    20601,
+    20602,
+    20603,
+    20604,
+    20605,
+    20606
+  ],
+  "firstFloorCopiedNodes": [
+    {
+      "node": 22861,
+      "referenceNode": 19573
+    },
+    {
+      "node": 22862,
+      "referenceNode": 20937
+    },
+    {
+      "node": 22863,
+      "referenceNode": 20938
+    },
+    {
+      "node": 22864,
+      "referenceNode": 20939
+    },
+    {
+      "node": 22865,
+      "referenceNode": 20940
+    },
+    {
+      "node": 22866,
+      "referenceNode": 20941
+    },
+    {
+      "node": 22867,
+      "referenceNode": 20942
+    },
+    {
+      "node": 22868,
+      "referenceNode": 22823
+    },
+    {
+      "node": 22869,
+      "referenceNode": 22824
+    },
+    {
+      "node": 22870,
+      "referenceNode": 22825
+    },
+    {
+      "node": 22871,
+      "referenceNode": 20900
+    },
+    {
+      "node": 22872,
+      "referenceNode": 20901
+    },
+    {
+      "node": 22873,
+      "referenceNode": 20902
+    },
+    {
+      "node": 22874,
+      "referenceNode": 20903
+    },
+    {
+      "node": 22875,
+      "referenceNode": 20904
+    },
+    {
+      "node": 22876,
+      "referenceNode": 20905
+    },
+    {
+      "node": 22877,
+      "referenceNode": 20906
+    },
+    {
+      "node": 22878,
+      "referenceNode": 20907
+    },
+    {
+      "node": 22879,
+      "referenceNode": 20908
+    },
+    {
+      "node": 22880,
+      "referenceNode": 20909
+    },
+    {
+      "node": 22881,
+      "referenceNode": 20910
+    },
+    {
+      "node": 22882,
+      "referenceNode": 20911
+    },
+    {
+      "node": 22883,
+      "referenceNode": 20912
+    },
+    {
+      "node": 22884,
+      "referenceNode": 20913
+    },
+    {
+      "node": 22885,
+      "referenceNode": 20914
+    },
+    {
+      "node": 22886,
+      "referenceNode": 20915
+    },
+    {
+      "node": 22887,
+      "referenceNode": 20916
+    },
+    {
+      "node": 22888,
+      "referenceNode": 20917
+    },
+    {
+      "node": 22889,
+      "referenceNode": 20918
+    },
+    {
+      "node": 22890,
+      "referenceNode": 20919
+    },
+    {
+      "node": 22891,
+      "referenceNode": 20920
+    },
+    {
+      "node": 22892,
+      "referenceNode": 20921
+    },
+    {
+      "node": 22893,
+      "referenceNode": 20922
+    },
+    {
+      "node": 22894,
+      "referenceNode": 20923
+    },
+    {
+      "node": 22895,
+      "referenceNode": 20924
+    },
+    {
+      "node": 22896,
+      "referenceNode": 20925
+    },
+    {
+      "node": 22897,
+      "referenceNode": 20926
+    },
+    {
+      "node": 22898,
+      "referenceNode": 22826
+    },
+    {
+      "node": 22899,
+      "referenceNode": 22827
+    },
+    {
+      "node": 22900,
+      "referenceNode": 22828
+    },
+    {
+      "node": 22901,
+      "referenceNode": 22829
+    },
+    {
+      "node": 22902,
+      "referenceNode": 22830
+    },
+    {
+      "node": 22903,
+      "referenceNode": 22831
+    },
+    {
+      "node": 22904,
+      "referenceNode": 22832
+    },
+    {
+      "node": 22905,
+      "referenceNode": 22833
+    },
+    {
+      "node": 22906,
+      "referenceNode": 22834
+    },
+    {
+      "node": 22907,
+      "referenceNode": 22835
+    },
+    {
+      "node": 22908,
+      "referenceNode": 20927
+    },
+    {
+      "node": 22909,
+      "referenceNode": 20928
+    },
+    {
+      "node": 22910,
+      "referenceNode": 20929
+    },
+    {
+      "node": 22911,
+      "referenceNode": 20930
+    },
+    {
+      "node": 22912,
+      "referenceNode": 20931
+    },
+    {
+      "node": 22913,
+      "referenceNode": 20932
+    },
+    {
+      "node": 22914,
+      "referenceNode": 20933
+    },
+    {
+      "node": 22915,
+      "referenceNode": 22836
+    },
+    {
+      "node": 22916,
+      "referenceNode": 20934
+    },
+    {
+      "node": 22917,
+      "referenceNode": 20935
+    },
+    {
+      "node": 22918,
+      "referenceNode": 22837
+    },
+    {
+      "node": 22919,
+      "referenceNode": 22838
+    },
+    {
+      "node": 22920,
+      "referenceNode": 22839
+    },
+    {
+      "node": 22921,
+      "referenceNode": 22840
+    },
+    {
+      "node": 22922,
+      "referenceNode": 22841
+    },
+    {
+      "node": 22923,
+      "referenceNode": 22842
+    },
+    {
+      "node": 22924,
+      "referenceNode": 22843
+    },
+    {
+      "node": 22925,
+      "referenceNode": 22844
+    },
+    {
+      "node": 22926,
+      "referenceNode": 22845
+    },
+    {
+      "node": 22927,
+      "referenceNode": 22846
+    },
+    {
+      "node": 22928,
+      "referenceNode": 22847
+    },
+    {
+      "node": 22929,
+      "referenceNode": 22848
+    },
+    {
+      "node": 22930,
+      "referenceNode": 22849
+    },
+    {
+      "node": 22931,
+      "referenceNode": 22850
+    },
+    {
+      "node": 22932,
+      "referenceNode": 22851
+    },
+    {
+      "node": 22933,
+      "referenceNode": 22852
+    },
+    {
+      "node": 22934,
+      "referenceNode": 22853
+    },
+    {
+      "node": 22935,
+      "referenceNode": 22854
+    },
+    {
+      "node": 22936,
+      "referenceNode": 22855
+    },
+    {
+      "node": 22937,
+      "referenceNode": 22856
+    },
+    {
+      "node": 22938,
+      "referenceNode": 20936
+    },
+    {
+      "node": 22939,
+      "referenceNode": 22857
+    },
+    {
+      "node": 22940,
+      "referenceNode": 22858
+    },
+    {
+      "node": 22941,
+      "referenceNode": 22859
+    },
+    {
+      "node": 22942,
+      "referenceNode": 22860
+    },
+    {
+      "node": 22943,
+      "referenceNode": 22676
+    },
+    {
+      "node": 22944,
+      "referenceNode": 22677
+    },
+    {
+      "node": 22945,
+      "referenceNode": 22678
+    },
+    {
+      "node": 22946,
+      "referenceNode": 22679
+    },
+    {
+      "node": 22947,
+      "referenceNode": 22680
+    }
+  ],
+  "floorGeometryChanged": false,
+  "uvTransform": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ]
+  ]
+}

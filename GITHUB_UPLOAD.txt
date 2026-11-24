@@ -1,0 +1,18 @@
+GitHub 준비 상태
+
+원격: https://github.com/DSD2-HIXBOX/HIXBOX.git
+브랜치: main
+
+큰 GLB와 충돌 원본은 Git LFS로 추적합니다. 받는 사람도 git lfs install 후 clone해야 합니다.
+node_modules, dist, outputs, backups, 인증서와 환경 변수 파일은 제외합니다.
+민감한 로컬 경로가 포함된 보고서 3개와 재생성 가능한 repaired-source.glb도 제외합니다.
+
+실행: npm ci / npm run dev
+빌드: npm run build
+원본 모델을 재가공하거나 중간 모델이 필요한 전체 검사를 할 때는 npm run prepare:explore를 먼저 실행합니다.
+
+이 저장소는 편집 프로젝트입니다. Git LFS 모델을 쓰는 이 구조는 GitHub Pages에 직접 배포하는 구조가 아닙니다.
+사이트 공개에는 별도로 제공한 학교_GitHub_배포용_v1.8.zip을 사용하세요.
+
+업로드 명령: git push -u origin main
+팀원 연결 방법은 TEAM_SETUP.txt를 참고하세요.

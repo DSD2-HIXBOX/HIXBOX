@@ -1,0 +1,14 @@
+[
+  {
+    "model": "classroom",
+    "files": 25,
+    "sha256Match": true,
+    "location": "public/models/classroom"
+  },
+  {
+    "model": "corridor",
+    "files": 16,
+    "sha256Match": true,
+    "location": "public/models/corridor/original"
+  }
+]

@@ -1,0 +1,18 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import * as THREE from 'three';
+import {readClassroom,readModel} from '../scripts/read-classroom.mjs';
+import {connectSchool} from '../src/world/corridor.js';
+import {addSchoolStairs} from '../src/world/schoolStairs.js';
+import {CollisionWorld} from '../src/core/CollisionWorld.js';
+globalThis.document={createElement:()=>({getContext:()=>({fillRect(){},fillText(){}})})};
+async function setup(){const c=new CollisionWorld(),w=connectSchool(await readClassroom(),await readModel('corridor/connected/'),c);addSchoolStairs(w,await readModel('stairs/'),c);return {w,c};}
+function go(c,p,t,heights=[]){for(let i=0;i<2200&&Math.hypot(p.x-t.x,p.z-t.z)>.02;i++){const dx=t.x-p.x,dz=t.z-p.z,len=Math.hypot(dx,dz);const old=p.y;c.move(p,dx/len*.025,dz/len*.025);heights.push(p.y);assert.ok(Math.abs(p.y-old)<.025,'ramp height jumped');}assert.ok(Math.hypot(p.x-t.x,p.z-t.z)<.05,`blocked at ${p.toArray()} aiming ${t.toArray()}`);}
+test('every pre-existing classroom and corridor asset is byte-identical',()=>{const files=JSON.parse(fs.readFileSync('docs/before-stairs-model-hashes.json'));assert.ok(files.length>=44);for(const file of files)assert.equal(crypto.createHash('sha256').update(fs.readFileSync(file.path)).digest('hex'),file.sha256,file.path);});
+test('stairs package only contains required model files and no external texture dependency',()=>{const g=JSON.parse(fs.readFileSync('public/models/stairs/scene.gltf'));assert.equal(g.images?.length??0,0);assert.equal(g.materials.length,8);assert.equal(g.buffers.length,1);assert.ok(fs.existsSync('public/models/stairs/'+g.buffers[0].uri));});
+test('added model uses eight static batches and matches corridor landing height',async()=>{const {w,c}=await setup();assert.equal(w.stairs.batches,8);assert.ok(w.stairs.colliderCount>30);assert.equal(w.stairs.topY,3.2);assert.equal(w.stairs.bottomY,0);const z=w.stairs.route[0].z;for(let x=w.stairs.dockX-.3;x<w.stairs.dockX+.3;x+=.025){assert.equal(c.floorAt(x,z,3.2),3.2);assert.equal(c.blocked(x,3.2,z),false);}assert.ok(w.stairs.bounds.min.z>=w.corridorInfo.floor.max.z-1e-6);});
+test('WASD/XR shared movement descends both flights continuously and returns without gaps',async()=>{const {w,c}=await setup(),p=w.stairs.route[0].clone(),heights=[];p.x=w.stairs.dockX-.5;for(const target of w.stairs.route)go(c,p,target,heights);assert.ok(Math.abs(p.y)<1e-8);for(let i=1;i<heights.length;i++)assert.ok(heights[i]<=heights[i-1]+1e-8);for(const target of w.stairs.route.slice().reverse())go(c,p,target);assert.equal(p.y,3.2);const exit=p.clone();exit.x=w.stairs.dockX-.5;go(c,p,exit);});
+test('stair walls and central railing block the body while the lower landing supports it',async()=>{const {w,c}=await setup(),p=w.stairs.route[3].clone();assert.equal(c.blocked(p.x,p.y,p.z),false);const before=p.clone();c.move(p,4,0);assert.ok(p.x<before.x+2);assert.equal(c.blocked(p.x,p.y,p.z),false);const bottom=w.stairs.route.at(-1);assert.equal(c.floorAt(bottom.x,bottom.z,0),0);});
+test('legacy straight evacuation path stays usable alongside the new stairwell',async()=>{const {w,c}=await setup(),d=w.doors[1],p=w.spawn.clone();w.update(0,p);d.moving.userData.onInteract(()=>{});w.update(1,p);const x=w.corridorInfo.evacuation.landingCenterX,z=w.corridorInfo.evacuation.z;for(const target of [new THREE.Vector3(6.5,3.2,p.z),new THREE.Vector3(x,3.2,10),new THREE.Vector3(x,3.2,z-6.5),new THREE.Vector3(x,0,z+2),new THREE.Vector3(x,0,z+12)])go(c,p,target);assert.equal(w.zone(p),'운동장');});

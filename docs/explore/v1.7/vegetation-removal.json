@@ -1,0 +1,4204 @@
+{
+  "version": "1.7",
+  "removedNodes": 524,
+  "removedTriangles": 667911,
+  "removedCollisionTriangles": 446770,
+  "beforeBytes": 355879352,
+  "afterBytes": 325002260,
+  "removed": [
+    {
+      "node": 264,
+      "name": "node:1295",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 267,
+      "name": "node:1298",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 268,
+      "name": "node:1299",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 269,
+      "name": "node:1301",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 270,
+      "name": "node:1302",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 271,
+      "name": "node:1304",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 272,
+      "name": "node:1305",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 274,
+      "name": "node:1307",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 275,
+      "name": "node:1308",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 294,
+      "name": "node:1504",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 297,
+      "name": "node:1507",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 298,
+      "name": "node:1508",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 299,
+      "name": "node:1510",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 300,
+      "name": "node:1511",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 301,
+      "name": "node:1512",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 302,
+      "name": "node:1514",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 303,
+      "name": "node:1516",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 305,
+      "name": "node:1518",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 307,
+      "name": "node:1520",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 308,
+      "name": "node:1521",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 312,
+      "name": "node:1525",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 314,
+      "name": "node:1527",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 315,
+      "name": "node:1528",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 322,
+      "name": "node:1538",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 323,
+      "name": "node:1539",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 325,
+      "name": "node:1541",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 328,
+      "name": "node:1544",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 329,
+      "name": "node:1545",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 330,
+      "name": "node:1546",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 331,
+      "name": "node:1548",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 332,
+      "name": "node:1549",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 333,
+      "name": "node:1551",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 334,
+      "name": "node:1552",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 335,
+      "name": "node:1553",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 336,
+      "name": "node:1555",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 338,
+      "name": "node:1557",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 340,
+      "name": "node:1559",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 341,
+      "name": "node:1561",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 342,
+      "name": "node:1562",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 347,
+      "name": "node:1567",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 348,
+      "name": "node:1568",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 349,
+      "name": "node:1570",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 350,
+      "name": "node:1571",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 351,
+      "name": "node:1572",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 352,
+      "name": "node:1574",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 354,
+      "name": "node:1576",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 356,
+      "name": "node:1579",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 357,
+      "name": "node:1580",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 361,
+      "name": "node:1584",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 362,
+      "name": "node:1585",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 363,
+      "name": "node:1587",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 364,
+      "name": "node:1588",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 365,
+      "name": "node:1589",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 366,
+      "name": "node:1591",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 368,
+      "name": "node:1593",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 370,
+      "name": "node:1595",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 371,
+      "name": "node:1597",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 372,
+      "name": "node:1598",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 376,
+      "name": "node:1602",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 378,
+      "name": "node:1604",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 379,
+      "name": "node:1605",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 382,
+      "name": "node:1609",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 383,
+      "name": "node:1611",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 384,
+      "name": "node:1612",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 498,
+      "name": "node:2479",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 499,
+      "name": "node:2480",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 500,
+      "name": "node:2481",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 501,
+      "name": "node:2482",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 502,
+      "name": "node:2483",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 504,
+      "name": "node:2485",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 506,
+      "name": "node:2487",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 507,
+      "name": "node:2489",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 508,
+      "name": "node:2490",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 509,
+      "name": "node:2492",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 510,
+      "name": "node:2493",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 511,
+      "name": "node:2494",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 512,
+      "name": "node:2496",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 514,
+      "name": "node:2498",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 515,
+      "name": "node:2500",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 516,
+      "name": "node:2501",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 517,
+      "name": "node:2502",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 518,
+      "name": "node:2503",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 519,
+      "name": "node:2504",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 520,
+      "name": "node:2505",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 521,
+      "name": "node:2506",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 522,
+      "name": "node:2507",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 523,
+      "name": "node:2509",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 524,
+      "name": "node:2510",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 530,
+      "name": "node:2534",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 531,
+      "name": "node:2535",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 532,
+      "name": "node:2536",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 533,
+      "name": "node:2537",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 534,
+      "name": "node:2538",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 535,
+      "name": "node:2539",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 537,
+      "name": "node:2541",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 538,
+      "name": "node:2542",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 539,
+      "name": "node:2543",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 540,
+      "name": "node:2544",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 541,
+      "name": "node:2546",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 542,
+      "name": "node:2547",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 544,
+      "name": "node:2549",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 545,
+      "name": "node:2550",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 546,
+      "name": "node:2551",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 547,
+      "name": "node:2552",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 548,
+      "name": "node:2553",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 549,
+      "name": "node:2554",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 550,
+      "name": "node:2555",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 551,
+      "name": "node:2556",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 552,
+      "name": "node:2558",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 553,
+      "name": "node:2559",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 554,
+      "name": "node:2560",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 555,
+      "name": "node:2561",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 556,
+      "name": "node:2563",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 557,
+      "name": "node:2564",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 565,
+      "name": "node:2592",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 567,
+      "name": "node:2595",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 568,
+      "name": "node:2596",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 569,
+      "name": "node:2597",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 570,
+      "name": "node:2598",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 572,
+      "name": "node:2600",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 573,
+      "name": "node:2602",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 575,
+      "name": "node:2604",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 576,
+      "name": "node:2605",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 577,
+      "name": "node:2606",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 578,
+      "name": "node:2607",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 580,
+      "name": "node:2609",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 581,
+      "name": "node:2610",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 582,
+      "name": "node:2611",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 583,
+      "name": "node:2612",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 584,
+      "name": "node:2613",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 585,
+      "name": "node:2614",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 586,
+      "name": "node:2615",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 587,
+      "name": "node:2616",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 588,
+      "name": "node:2617",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 589,
+      "name": "node:2618",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 590,
+      "name": "node:2619",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 591,
+      "name": "node:2620",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 592,
+      "name": "node:2621",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 593,
+      "name": "node:2622",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 594,
+      "name": "node:2623",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 595,
+      "name": "node:2624",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 596,
+      "name": "node:2625",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 597,
+      "name": "node:2626",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 598,
+      "name": "node:2627",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 599,
+      "name": "node:2628",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 600,
+      "name": "node:2629",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 601,
+      "name": "node:2630",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 602,
+      "name": "node:2631",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 603,
+      "name": "node:2632",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 604,
+      "name": "node:2633",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 605,
+      "name": "node:2634",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 606,
+      "name": "node:2635",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 607,
+      "name": "node:2636",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 608,
+      "name": "node:2637",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 609,
+      "name": "node:2638",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 610,
+      "name": "node:2639",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 611,
+      "name": "node:2640",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 612,
+      "name": "node:2641",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 613,
+      "name": "node:2642",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 614,
+      "name": "node:2643",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 615,
+      "name": "node:2644",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 616,
+      "name": "node:2645",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 617,
+      "name": "node:2646",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 618,
+      "name": "node:2647",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 619,
+      "name": "node:2648",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 620,
+      "name": "node:2649",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 621,
+      "name": "node:2650",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 622,
+      "name": "node:2651",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 623,
+      "name": "node:2652",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 625,
+      "name": "node:2654",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 626,
+      "name": "node:2655",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 627,
+      "name": "node:2656",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 628,
+      "name": "node:2657",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 629,
+      "name": "node:2658",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 630,
+      "name": "node:2659",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 631,
+      "name": "node:2660",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 632,
+      "name": "node:2661",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 633,
+      "name": "node:2662",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 634,
+      "name": "node:2663",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 635,
+      "name": "node:2664",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 636,
+      "name": "node:2665",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 637,
+      "name": "node:2666",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 638,
+      "name": "node:2667",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 639,
+      "name": "node:2668",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 640,
+      "name": "node:2669",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 641,
+      "name": "node:2670",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 643,
+      "name": "node:2672",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 644,
+      "name": "node:2673",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 645,
+      "name": "node:2674",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 646,
+      "name": "node:2675",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 647,
+      "name": "node:2676",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 648,
+      "name": "node:2677",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 649,
+      "name": "node:2678",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 650,
+      "name": "node:2679",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 651,
+      "name": "node:2680",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 652,
+      "name": "node:2681",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 653,
+      "name": "node:2682",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 654,
+      "name": "node:2683",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 655,
+      "name": "node:2684",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 656,
+      "name": "node:2685",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 657,
+      "name": "node:2686",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 658,
+      "name": "node:2687",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 659,
+      "name": "node:2688",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 660,
+      "name": "node:2689",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 661,
+      "name": "node:2690",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 662,
+      "name": "node:2691",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 663,
+      "name": "node:2692",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 665,
+      "name": "node:2694",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 666,
+      "name": "node:2695",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 667,
+      "name": "node:2696",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 668,
+      "name": "node:2697",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 670,
+      "name": "node:2699",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 671,
+      "name": "node:2700",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 672,
+      "name": "node:2705",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 673,
+      "name": "node:2706",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 674,
+      "name": "node:2708",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 675,
+      "name": "node:2710",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 676,
+      "name": "node:2712",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 677,
+      "name": "node:2713",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 678,
+      "name": "node:2714",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 679,
+      "name": "node:2715",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 680,
+      "name": "node:2716",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 681,
+      "name": "node:2717",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 682,
+      "name": "node:2718",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 683,
+      "name": "node:2719",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 684,
+      "name": "node:2720",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 685,
+      "name": "node:2721",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 686,
+      "name": "node:2722",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 687,
+      "name": "node:2723",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 688,
+      "name": "node:2725",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 690,
+      "name": "node:2727",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 691,
+      "name": "node:2729",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 692,
+      "name": "node:2730",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 693,
+      "name": "node:2731",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 694,
+      "name": "node:2732",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 697,
+      "name": "node:2746",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 698,
+      "name": "node:2747",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 699,
+      "name": "node:2748",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 700,
+      "name": "node:2749",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 701,
+      "name": "node:2750",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 702,
+      "name": "node:2751",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 703,
+      "name": "node:2752",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 704,
+      "name": "node:2753",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 705,
+      "name": "node:2754",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 706,
+      "name": "node:2755",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 707,
+      "name": "node:2756",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 708,
+      "name": "node:2757",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 709,
+      "name": "node:2758",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 710,
+      "name": "node:2759",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 711,
+      "name": "node:2760",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 712,
+      "name": "node:2761",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 713,
+      "name": "node:2762",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 714,
+      "name": "node:2763",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 715,
+      "name": "node:2764",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 716,
+      "name": "node:2765",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 717,
+      "name": "node:2766",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 718,
+      "name": "node:2767",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 719,
+      "name": "node:2768",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 720,
+      "name": "node:2769",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 721,
+      "name": "node:2770",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 722,
+      "name": "node:2771",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 723,
+      "name": "node:2772",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 724,
+      "name": "node:2773",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 725,
+      "name": "node:2774",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 726,
+      "name": "node:2775",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 727,
+      "name": "node:2777",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 728,
+      "name": "node:2778",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 729,
+      "name": "node:2779",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 731,
+      "name": "node:2781",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 732,
+      "name": "node:2782",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 733,
+      "name": "node:2783",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 735,
+      "name": "node:2785",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 736,
+      "name": "node:2786",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 737,
+      "name": "node:2788",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 738,
+      "name": "node:2789",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 739,
+      "name": "node:2790",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 740,
+      "name": "node:2791",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 741,
+      "name": "node:2792",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 743,
+      "name": "node:2798",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 744,
+      "name": "node:2799",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 746,
+      "name": "node:2801",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 747,
+      "name": "node:2803",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 748,
+      "name": "node:2804",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 749,
+      "name": "node:2805",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 750,
+      "name": "node:2806",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 752,
+      "name": "node:2809",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 753,
+      "name": "node:2811",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 754,
+      "name": "node:2813",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 755,
+      "name": "node:2816",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 756,
+      "name": "node:2817",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 757,
+      "name": "node:2819",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 759,
+      "name": "node:2821",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 760,
+      "name": "node:2823",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 761,
+      "name": "node:2824",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 762,
+      "name": "node:2827",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 763,
+      "name": "node:2829",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 765,
+      "name": "node:2831",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 766,
+      "name": "node:2832",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 767,
+      "name": "node:2833",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 768,
+      "name": "node:2834",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 770,
+      "name": "node:2844",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 771,
+      "name": "node:2845",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 772,
+      "name": "node:2846",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 773,
+      "name": "node:2847",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 774,
+      "name": "node:2849",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 775,
+      "name": "node:2851",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 776,
+      "name": "node:2852",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 777,
+      "name": "node:2853",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 779,
+      "name": "node:2857",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 780,
+      "name": "node:2858",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 781,
+      "name": "node:2860",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 782,
+      "name": "node:2861",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 783,
+      "name": "node:2864",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 784,
+      "name": "node:2865",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 785,
+      "name": "node:2866",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 786,
+      "name": "node:2867",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 787,
+      "name": "node:2868",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 789,
+      "name": "node:2870",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 790,
+      "name": "node:2872",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 791,
+      "name": "node:2873",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 792,
+      "name": "node:2874",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 793,
+      "name": "node:2875",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 794,
+      "name": "node:2876",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 795,
+      "name": "node:2878",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 797,
+      "name": "node:2880",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 798,
+      "name": "node:2881",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 799,
+      "name": "node:2882",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 800,
+      "name": "node:2893",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 801,
+      "name": "node:2895",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 802,
+      "name": "node:2897",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 803,
+      "name": "node:2899",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 804,
+      "name": "node:2901",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 805,
+      "name": "node:2903",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 806,
+      "name": "node:2905",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 807,
+      "name": "node:2907",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 808,
+      "name": "node:2909",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 810,
+      "name": "node:2911",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 811,
+      "name": "node:2913",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 812,
+      "name": "node:2914",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 813,
+      "name": "node:2915",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 817,
+      "name": "node:2919",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 1010,
+      "name": "node:5429",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 1011,
+      "name": "node:5430",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1012,
+      "name": "node:5431",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 1014,
+      "name": "node:5433",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 1016,
+      "name": "node:5435",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 1017,
+      "name": "node:5436",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 1018,
+      "name": "node:5437",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1019,
+      "name": "node:5438",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 1020,
+      "name": "node:5439",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 1021,
+      "name": "node:5440",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 1022,
+      "name": "node:5441",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 1023,
+      "name": "node:5442",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 1024,
+      "name": "node:5443",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1025,
+      "name": "node:5444",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1026,
+      "name": "node:5445",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1027,
+      "name": "node:5446",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1029,
+      "name": "node:5448",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 1030,
+      "name": "node:5449",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1031,
+      "name": "node:5450",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 1032,
+      "name": "node:5451",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1033,
+      "name": "node:5453",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 1034,
+      "name": "node:5454",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1035,
+      "name": "node:5455",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1036,
+      "name": "node:5456",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1037,
+      "name": "node:5457",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1039,
+      "name": "node:5459",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 1040,
+      "name": "node:5460",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 1041,
+      "name": "node:5461",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1042,
+      "name": "node:5462",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1043,
+      "name": "node:5463",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 1045,
+      "name": "node:5465",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 1046,
+      "name": "node:5466",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1047,
+      "name": "node:5467",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1048,
+      "name": "node:5468",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1049,
+      "name": "node:5469",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1050,
+      "name": "node:5470",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1051,
+      "name": "node:5471",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 1052,
+      "name": "node:5472",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1053,
+      "name": "node:5473",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 1054,
+      "name": "node:5474",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 1055,
+      "name": "node:5475",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1057,
+      "name": "node:5477",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 1058,
+      "name": "node:5478",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 1059,
+      "name": "node:5479",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1060,
+      "name": "node:5484",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1061,
+      "name": "node:5485",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1062,
+      "name": "node:5495",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1063,
+      "name": "node:5496",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 1064,
+      "name": "node:5504",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1065,
+      "name": "node:5505",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 1066,
+      "name": "node:5506",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1067,
+      "name": "node:5507",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 1068,
+      "name": "node:5508",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1069,
+      "name": "node:5509",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 1071,
+      "name": "node:5511",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 1073,
+      "name": "node:5513",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 1074,
+      "name": "node:5514",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 1075,
+      "name": "node:5515",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1076,
+      "name": "node:5516",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 1078,
+      "name": "node:5518",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 992
+    },
+    {
+      "node": 1079,
+      "name": "node:5519",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1080,
+      "name": "node:5520",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1081,
+      "name": "node:5521",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 1082,
+      "name": "node:5522",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1083,
+      "name": "node:5523",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1084,
+      "name": "node:5524",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 1085,
+      "name": "node:5525",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 2307,
+      "name": "node:9596",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 2308,
+      "name": "node:9597",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 2309,
+      "name": "node:9598",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 2310,
+      "name": "node:9599",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 2566,
+      "name": "node:10627",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 2567,
+      "name": "node:10628",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 2568,
+      "name": "node:10629",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 2569,
+      "name": "node:10630",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 2570,
+      "name": "node:10631",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 2571,
+      "name": "node:10632",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 2572,
+      "name": "node:10633",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 2573,
+      "name": "node:10634",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 2574,
+      "name": "node:10635",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 2575,
+      "name": "node:10636",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 976
+    },
+    {
+      "node": 2576,
+      "name": "node:10637",
+      "materials": [
+        "tree6"
+      ],
+      "triangles": 596
+    },
+    {
+      "node": 2577,
+      "name": "node:10638",
+      "materials": [
+        "tree5"
+      ],
+      "triangles": 989
+    },
+    {
+      "node": 2578,
+      "name": "node:10639",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 2579,
+      "name": "node:10640",
+      "materials": [
+        "tree3"
+      ],
+      "triangles": 776
+    },
+    {
+      "node": 2581,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:27:2:55",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 4864
+    },
+    {
+      "node": 2582,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:27:2:56",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 7904
+    },
+    {
+      "node": 2583,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:19:2:48",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 11456
+    },
+    {
+      "node": 2584,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:20:2:48",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 1312
+    },
+    {
+      "node": 2585,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:19:2:43",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 7424
+    },
+    {
+      "node": 2586,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:20:2:43",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 864
+    },
+    {
+      "node": 2587,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:19:2:44",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 4032
+    },
+    {
+      "node": 2588,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:20:2:44",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 448
+    },
+    {
+      "node": 2589,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:19:2:39",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 11456
+    },
+    {
+      "node": 2590,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:20:2:39",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 1312
+    },
+    {
+      "node": 2591,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:19:2:34",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 4640
+    },
+    {
+      "node": 2592,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:19:2:35",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 6816
+    },
+    {
+      "node": 2593,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:20:2:34",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 352
+    },
+    {
+      "node": 2594,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:20:2:35",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 960
+    },
+    {
+      "node": 2595,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:19:2:30",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 8736
+    },
+    {
+      "node": 2596,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:20:2:30",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 1088
+    },
+    {
+      "node": 2597,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:19:2:31",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 2720
+    },
+    {
+      "node": 2598,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:20:2:31",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 224
+    },
+    {
+      "node": 2599,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:19:2:26",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 10688
+    },
+    {
+      "node": 2600,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:19:2:25",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 768
+    },
+    {
+      "node": 2601,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:20:2:25",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 32
+    },
+    {
+      "node": 2602,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:20:2:26",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 1280
+    },
+    {
+      "node": 2603,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:19:2:21",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 5152
+    },
+    {
+      "node": 2604,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:20:2:21",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 352
+    },
+    {
+      "node": 2605,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:19:2:22",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 6304
+    },
+    {
+      "node": 2606,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:20:2:22",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 960
+    },
+    {
+      "node": 2608,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:22:2:6",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 7840
+    },
+    {
+      "node": 2609,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:23:2:6",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 4928
+    },
+    {
+      "node": 2610,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:19:2:17",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 11456
+    },
+    {
+      "node": 2611,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:20:2:17",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 1312
+    },
+    {
+      "node": 2612,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:22:2:-5",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 6944
+    },
+    {
+      "node": 2613,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:23:2:-5",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 4384
+    },
+    {
+      "node": 2614,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:22:2:-4",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 896
+    },
+    {
+      "node": 2615,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:23:2:-4",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 544
+    },
+    {
+      "node": 2616,
+      "name": "node:15043",
+      "materials": [
+        "tree3"
+      ],
+      "triangles": 776
+    },
+    {
+      "node": 2617,
+      "name": "node:15044",
+      "materials": [
+        "tree3"
+      ],
+      "triangles": 776
+    },
+    {
+      "node": 2618,
+      "name": "node:15045",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 2619,
+      "name": "node:15046",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 2620,
+      "name": "node:15047",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 2621,
+      "name": "node:15048",
+      "materials": [
+        "tree3"
+      ],
+      "triangles": 772
+    },
+    {
+      "node": 2622,
+      "name": "node:15049",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 2623,
+      "name": "node:15050",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 906
+    },
+    {
+      "node": 2624,
+      "name": "node:15051",
+      "materials": [
+        "tree3"
+      ],
+      "triangles": 776
+    },
+    {
+      "node": 2625,
+      "name": "node:15052",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 2626,
+      "name": "node:15053",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 907
+    },
+    {
+      "node": 2627,
+      "name": "node:15054",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 2628,
+      "name": "node:15055",
+      "materials": [
+        "tree3"
+      ],
+      "triangles": 772
+    },
+    {
+      "node": 2629,
+      "name": "node:15056",
+      "materials": [
+        "tree3"
+      ],
+      "triangles": 776
+    },
+    {
+      "node": 2630,
+      "name": "node:15057",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 2631,
+      "name": "node:15058",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 2632,
+      "name": "node:15059",
+      "materials": [
+        "tree3"
+      ],
+      "triangles": 776
+    },
+    {
+      "node": 2633,
+      "name": "node:15060",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 2721,
+      "name": "node:15215",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 2722,
+      "name": "node:15216",
+      "materials": [
+        "tree3"
+      ],
+      "triangles": 776
+    },
+    {
+      "node": 2729,
+      "name": "node:15223",
+      "materials": [
+        "tree3"
+      ],
+      "triangles": 776
+    },
+    {
+      "node": 2730,
+      "name": "node:15224",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 2731,
+      "name": "node:15225",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 936
+    },
+    {
+      "node": 2732,
+      "name": "node:15226",
+      "materials": [
+        "tree3"
+      ],
+      "triangles": 776
+    },
+    {
+      "node": 2733,
+      "name": "node:15227",
+      "materials": [
+        "tree3"
+      ],
+      "triangles": 776
+    },
+    {
+      "node": 2734,
+      "name": "node:15228",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 2735,
+      "name": "node:15229",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 2736,
+      "name": "node:15230",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 2737,
+      "name": "node:15231",
+      "materials": [
+        "tree3"
+      ],
+      "triangles": 776
+    },
+    {
+      "node": 2738,
+      "name": "node:15232",
+      "materials": [
+        "tree1"
+      ],
+      "triangles": 978
+    },
+    {
+      "node": 2739,
+      "name": "node:15233",
+      "materials": [
+        "tree3"
+      ],
+      "triangles": 776
+    },
+    {
+      "node": 2740,
+      "name": "node:15234",
+      "materials": [
+        "tree3"
+      ],
+      "triangles": 776
+    },
+    {
+      "node": 2745,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-36:2:-17",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 4608
+    },
+    {
+      "node": 2746,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-36:2:-16",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 2400
+    },
+    {
+      "node": 2747,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-37:2:-17",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 3456
+    },
+    {
+      "node": 2748,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-37:2:-16",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 2304
+    },
+    {
+      "node": 2749,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-26:2:-17",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 4608
+    },
+    {
+      "node": 2750,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-26:2:-16",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 2400
+    },
+    {
+      "node": 2751,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-27:2:-17",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 3456
+    },
+    {
+      "node": 2752,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-27:2:-16",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 2304
+    },
+    {
+      "node": 2754,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-21:2:-17",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 4608
+    },
+    {
+      "node": 2755,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-21:2:-16",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 2400
+    },
+    {
+      "node": 2756,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-22:2:-17",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 3456
+    },
+    {
+      "node": 2757,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-22:2:-16",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 2304
+    },
+    {
+      "node": 2758,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-16:2:-17",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 4608
+    },
+    {
+      "node": 2759,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-16:2:-16",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 2400
+    },
+    {
+      "node": 2760,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-17:2:-17",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 3456
+    },
+    {
+      "node": 2761,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-17:2:-16",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 2304
+    },
+    {
+      "node": 2762,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-11:2:-17",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 4608
+    },
+    {
+      "node": 2763,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-11:2:-16",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 2400
+    },
+    {
+      "node": 2764,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-12:2:-17",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 3456
+    },
+    {
+      "node": 2765,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:-12:2:-16",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 2304
+    },
+    {
+      "node": 2767,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:4:2:-17",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 4608
+    },
+    {
+      "node": 2768,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:4:2:-16",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 2400
+    },
+    {
+      "node": 2769,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:3:2:-17",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 3456
+    },
+    {
+      "node": 2770,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:3:2:-16",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 2304
+    },
+    {
+      "node": 2771,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:9:2:-17",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 4608
+    },
+    {
+      "node": 2772,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:9:2:-16",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 2400
+    },
+    {
+      "node": 2773,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:8:2:-17",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 3456
+    },
+    {
+      "node": 2774,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:8:2:-16",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 2304
+    },
+    {
+      "node": 2776,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:14:2:-17",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 4608
+    },
+    {
+      "node": 2777,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:14:2:-16",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 2400
+    },
+    {
+      "node": 2778,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:13:2:-17",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 3456
+    },
+    {
+      "node": 2779,
+      "name": "batch:150:NORMAL,POSITION,TEXCOORD_0:13:2:-16",
+      "materials": [
+        "[0072_DarkSeaGreen]"
+      ],
+      "triangles": 2304
+    }
+  ],
+  "retainedCollision": "All non-plant collision triangles copied byte-for-byte in original order",
+  "preserved": "Indoor plants, grass surfaces, planters, main building, grounds, materials, textures, doors, navigation, PC and VR code"
+}

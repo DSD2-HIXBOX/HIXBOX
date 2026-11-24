@@ -1,0 +1,9 @@
+{
+  "identicalToVersion": "1.3",
+  "sha256": {
+    "render.glb": "39e721deb1d418d5765f4c2e35d658b79ff53fc557542e6d85c2d7d3c36ede48",
+    "collision.bin.gz": "d56aa414aab5fb090c08ac7136f9cdd74e608636907dfe4353c3b1e8665100cc",
+    "doors.json": "9b12cf455d79d3102cf7f22198d96a65ee39d02047b828e3acadd92d38fac922",
+    "navigation.json": "9bb5dc014a267aa76426d413f25c0f56556dbf17f83373958e85fb51d7761399"
+  }
+}

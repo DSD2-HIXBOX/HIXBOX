@@ -1,0 +1,52 @@
+{
+  "source": "public/models/corridor/original/scene.gltf",
+  "output": "public/models/corridor/connected/scene.gltf",
+  "modified": [
+    {
+      "nodeIndex": 5,
+      "name": "The Japanese school corridor_Wall_0",
+      "reason": "Replace shared corridor facade with unchanged Korean classroom wall and doors",
+      "beforeTriangles": 1734,
+      "afterTriangles": 1551,
+      "cutBox": {
+        "min": [
+          -100,
+          -0.1,
+          -4.226616207
+        ],
+        "max": [
+          100,
+          2.94,
+          4.226617399
+        ]
+      }
+    },
+    {
+      "nodeIndex": 8,
+      "name": "The Japanese school corridor_Ladder_0",
+      "reason": "Positive-end stair replaced by relocated existing evacuation stair; no extra door",
+      "beforeTriangles": 854,
+      "afterTriangles": 427,
+      "cutBox": {
+        "min": [
+          -100,
+          -0.1,
+          11.6259
+        ],
+        "max": [
+          100,
+          100,
+          100
+        ]
+      }
+    }
+  ],
+  "added": "Three shallow wall returns at shared facade edges (existing Wall material); no door geometry added",
+  "unchangedMeshes": [
+    0,
+    2,
+    3
+  ],
+  "originalMaterialsPreserved": true,
+  "originalImagesPreserved": true
+}

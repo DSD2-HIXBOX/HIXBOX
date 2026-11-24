@@ -1,0 +1,10 @@
+{
+  "sourceNodes": 22721,
+  "batches": 3740,
+  "triangles": 4407859,
+  "geometrySimplified": false,
+  "materialsUnchanged": true,
+  "imagesUnchanged": true,
+  "bytes": 355879352,
+  "vegetationRemoval": "docs/explore/v1.7/vegetation-removal.json"
+}

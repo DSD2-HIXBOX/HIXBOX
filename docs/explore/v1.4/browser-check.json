@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-17",
+  "gpuDepthTest": {
+    "passed": 10,
+    "total": 10,
+    "distancesMeters": [
+      1,
+      2,
+      10,
+      40,
+      100
+    ],
+    "drawOrders": 2,
+    "method": "Read render-target pixel for two coincident opaque planes with final depth priority"
+  },
+  "pcPreview": {
+    "fps": 60.0,
+    "calls": 571,
+    "triangles": 875257,
+    "cpuMs": 5.2,
+    "physicsMs": 0.1,
+    "renderer": "ANGLE Metal Apple M2"
+  },
+  "questHardwareTested": false,
+  "nativeDoubleClickTested": false
+}

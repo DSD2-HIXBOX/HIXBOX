@@ -1,0 +1,6 @@
+public/models/explore/collision.bin filter=lfs diff=lfs merge=lfs -text
+public/models/explore/render-source.glb filter=lfs diff=lfs merge=lfs -text
+public/models/explore/render.glb filter=lfs diff=lfs merge=lfs -text
+public/models/explore/school.glb filter=lfs diff=lfs merge=lfs -text
+source-models/exterior.glb filter=lfs diff=lfs merge=lfs -text
+source-models/interior.glb filter=lfs diff=lfs merge=lfs -text

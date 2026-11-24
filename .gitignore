@@ -1,0 +1,26 @@
+node_modules/
+dist/
+.vite/
+certs/
+.DS_Store
+
+# Local outputs and backups
+backups/
+outputs/
+build/
+*.log
+*.tmp
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+.DS_Store
+# Reproducible intermediate model
+public/models/explore/repaired-source.glb
+# Local reports containing personal filesystem paths
+docs/unified-build-report.json
+docs/explore/v1.6/compression-options.json
+docs/explore/v1.6/source-package.json

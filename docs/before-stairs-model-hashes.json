@@ -1,0 +1,178 @@
+[
+  {
+    "path": "public/models/classroom/license.txt",
+    "sha256": "873bb392fcba8f96bd1ce68e3df4bc7fab567efbecf0227c3a1b3bb69a591b21"
+  },
+  {
+    "path": "public/models/classroom/scene.bin",
+    "sha256": "a8b09c431e702530df8a96fc130bf8052f1d3023526698c0fda88fd95be4dc00"
+  },
+  {
+    "path": "public/models/classroom/scene.gltf",
+    "sha256": "4460be7df832b5799010203d01899d8a14a1cf5d53b6ef1d6927916b6bf6e63c"
+  },
+  {
+    "path": "public/models/classroom/textures/pasted__standardSurface21_baseColor.jpeg",
+    "sha256": "5da51cf6ecdeb3c95cb37e2c0f607246dc4e357a72e08afda2dad58f685a34bb"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface10_baseColor.png",
+    "sha256": "dcb9aa74ca0a73a5630da59edaa7dea660a5ba016e90a0bef348ee9241867fcc"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface11_baseColor.png",
+    "sha256": "8d90d2164b8723ccaf9b14668d88b697e83b8ca907dee85e44f7f003b7a7aea7"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface12_baseColor.jpeg",
+    "sha256": "f3908db71ed3086e32a2e47e2d5917efb69595983d0cf1ba7bdde5ffdae4c7c5"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface15_baseColor.jpeg",
+    "sha256": "dc7ac98c6cda5ce105020ed2fe0fd1ca049a0ff43640606ff70f2500b3a46c63"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface17_baseColor.jpeg",
+    "sha256": "2af66c4cbb0c5e15abbb180899b0843e32e42b68cc21bf062fa205852f87c03d"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface18_baseColor.jpeg",
+    "sha256": "18bd35db4bc04bfcecba818c42a4608eb96413ed99e86641c7ebffb0d6795b72"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface19_baseColor.png",
+    "sha256": "0c53157efee007078b5663002093fb458e9bf25b637dce2f3aeabdeaa98eebcd"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface20_baseColor.jpeg",
+    "sha256": "d7ee86ceaa6f6c36974dcdf9ba48c2ef9d5beb541edd982aa759f96a74ac3928"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface22_baseColor.jpeg",
+    "sha256": "23c90dd89182b459121db5a4de2bc2999c51005b220a42a9029bb81c0f5f413b"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface23_baseColor.jpeg",
+    "sha256": "b81be6a29c3cd96247d0033570fb52b89ea2d6dc91f8fd61b543f1e6c87a3fd6"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface26_baseColor.png",
+    "sha256": "f0dca691cc37593aae3233b2161098e48e5c515edf8585f503bfdd1bc976c7d9"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface27_baseColor.jpeg",
+    "sha256": "7ba2bd13eab1ad3e439c9d06cf03a68958a5c238237ecdc42e775d9d4d7325ed"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface2_baseColor.jpeg",
+    "sha256": "68b17a3a435727d3bf42eefe197f7471840ac1beecb870770cb863659463370d"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface30_baseColor.jpeg",
+    "sha256": "1baa0a37b79f3cf82e1e60e72092fcc80c9078194f48af127ecf591a87e3c97c"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface31_baseColor.jpeg",
+    "sha256": "a49d6415c6415bba823c2e0185f4f0e52992737aa2a82a0ffa44d939aa447d4d"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface35_baseColor.jpeg",
+    "sha256": "20331d9c02a5bbe2c79bbc703819624091cb576ff18c9affe13bf869f5b20140"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface36_baseColor.jpeg",
+    "sha256": "b1f84876744b27d146d9cf30a2d12a7abecf5bc957f019e307a58c695c0c0de4"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface37_baseColor.jpeg",
+    "sha256": "aab96417d4911012ce646aa1cabff1316300e348bb0a2093cda86b9020dadc50"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface38_baseColor.jpeg",
+    "sha256": "d9a5798bdcb8955956d178f60b71c21e86bf2e618e253370f3da4974537d7e1f"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface6_baseColor.jpeg",
+    "sha256": "88051a3441ec58f6a901fbf760f589c61a661fd22bb8648f5c5e8a03459c71b6"
+  },
+  {
+    "path": "public/models/classroom/textures/standardSurface8_baseColor.png",
+    "sha256": "283dd8551fb753ba19260fd3fd471b975c287babb5ee65ce4b7bb8f80918c603"
+  },
+  {
+    "path": "public/models/corridor/README.md",
+    "sha256": "7c4e51c496f70886ab2a9cdd02f174972c3990c934bd523203afce0235593a60"
+  },
+  {
+    "path": "public/models/corridor/connected/connection.bin",
+    "sha256": "3b39f9f92c714c25967567d1c174e522a975cd3f1332594bdec3806903234c03"
+  },
+  {
+    "path": "public/models/corridor/connected/scene.gltf",
+    "sha256": "19b9a6962dde0b66432f19340d1d50f92f59f1a975d5ff6bdc00b4de8fb7216f"
+  },
+  {
+    "path": "public/models/corridor/original/license.txt",
+    "sha256": "298707fea7c859eab8f8d3a2d30c594a42e6aff5f536ac3030263d6e2dee3e7a"
+  },
+  {
+    "path": "public/models/corridor/original/scene.bin",
+    "sha256": "19d9818ccd9b646dd5208bb64f726def86fd1db086d24da09b81bed6a7a4f4cc"
+  },
+  {
+    "path": "public/models/corridor/original/scene.gltf",
+    "sha256": "0143ef7e50e6e19a9f064516fac63b5eb50381547e60c05d19292a7fc597a5ba"
+  },
+  {
+    "path": "public/models/corridor/original/textures/Floor_baseColor.png",
+    "sha256": "73122e0e5d3847bf2856c5e75dbc8b5ec989a24bd065e8ecc497d7ad1978591c"
+  },
+  {
+    "path": "public/models/corridor/original/textures/Floor_metallicRoughness.png",
+    "sha256": "ebe07a75c2ed9a23b03d194b6ffabc1a55bebda32b6ca839dd25aedfac43604d"
+  },
+  {
+    "path": "public/models/corridor/original/textures/Floor_normal.png",
+    "sha256": "36e357a902e91e6870fb41bbfe124583d47f6388d44a7dec32804e64f8c7f7f7"
+  },
+  {
+    "path": "public/models/corridor/original/textures/Ladder_baseColor.png",
+    "sha256": "c9ccb424728a494076b565f093ffbc0b2b301409f1dc1ae0d673bfec8c05bc89"
+  },
+  {
+    "path": "public/models/corridor/original/textures/Ladder_metallicRoughness.png",
+    "sha256": "96917d1b3d22668c114f3222727cc930bbfa144f696f55be57577974ba7da2b5"
+  },
+  {
+    "path": "public/models/corridor/original/textures/Roof_baseColor.png",
+    "sha256": "83721a8d004b8b877281d17b4f23b04052d1f8d95257f71d4d849efd9134bafe"
+  },
+  {
+    "path": "public/models/corridor/original/textures/Roof_emissive.png",
+    "sha256": "74d2bc9b3a6f794ac44a44053715c82cc7a2c0c1d84d00f526e38696bf659441"
+  },
+  {
+    "path": "public/models/corridor/original/textures/Roof_metallicRoughness.png",
+    "sha256": "87fb4ed4a59b4540c4c4854872dc75bdcc364947fd5de516f31933537269573e"
+  },
+  {
+    "path": "public/models/corridor/original/textures/Wall_baseColor.png",
+    "sha256": "7f8b6f35fc2e170fb0cc640cc397164a8ddde6241207c966aca12fe5eae2e21a"
+  },
+  {
+    "path": "public/models/corridor/original/textures/Wall_metallicRoughness.png",
+    "sha256": "8468c53eaaea7210c22dda1d33fb2f115b4f4b3688a2ef6a4faac9dc50c2a227"
+  },
+  {
+    "path": "public/models/corridor/original/textures/Wall_normal.png",
+    "sha256": "23232e053aa210c4a132259ffdd5e595e49ef5a18a39b7e61a763ffd8271b932"
+  },
+  {
+    "path": "public/models/corridor/original/textures/Windows_baseColor.png",
+    "sha256": "2283c4d44d615f9f80ce108fba852d7386cbc4efb6d5b015c3137b8f7c3111b2"
+  },
+  {
+    "path": "public/models/corridor/original/textures/Windows_metallicRoughness.png",
+    "sha256": "44628b3f1c54afffcfe8149ac7858b0dbcce1cd4c16402f9a07a5bc2bb4979c3"
+  }
+]

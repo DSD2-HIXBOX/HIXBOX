@@ -1,0 +1,18 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {StoryTimeline,phoneInView} from '../src/story/StoryTimeline.js';
+test('active time starts alert at 3 s, waits for confirmation, then quakes after 2 s exactly once',()=>{const events=[],s=new StoryTimeline(e=>events.push(e));s.update(120,false);assert.equal(s.phase,'peaceful');s.update(2.99,true);assert.equal(s.phase,'peaceful');assert.equal(s.confirm(),false);s.update(.01,true);assert.equal(s.phase,'alert');s.update(30,true);assert.equal(s.phase,'alert');assert.equal(s.confirm(),true);assert.equal(s.confirm(),false);s.update(1.99,true);assert.equal(s.phase,'confirmed');s.update(100,false);assert.equal(s.phase,'confirmed');s.update(.02,true);assert.equal(s.phase,'earthquake');s.update(10,true);assert.deepEqual(events,['alert','confirmed','earthquake']);s.reset();assert.equal(s.phase,'peaceful');assert.equal(s.quakeTime,0);});
+test('XR reading requires raised, nearby, in-view phone facing the headset',()=>{const h={x:0,y:1.65,z:0},f={x:0,y:0,z:-1},p={x:0,y:1.6,z:-.4},n={x:0,y:0,z:1};assert.equal(phoneInView(h,f,p,n),true);assert.equal(phoneInView(h,f,p,{x:0,y:0,z:-1}),false);assert.equal(phoneInView(h,f,{...p,y:.8},n),false);assert.equal(phoneInView(h,f,{...p,x:.5},n),false);assert.equal(phoneInView(h,f,{...p,z:-1.1},n),false);assert.equal(phoneInView(h,f,{...p,z:-.1},n),false);});
+
+import * as T from 'three';
+import {EarthquakeStory} from '../src/story/EarthquakeStory.js';
+function setup(xr=false){
+ const ctx=new Proxy({measureText:s=>({width:s.length*30})},{get:(o,k)=>o[k]??(()=>{})});
+ globalThis.document={createElement:()=>({width:0,height:0,getContext:()=>ctx})};
+ const scene=new T.Scene(),camera=new T.PerspectiveCamera(70,1.5,.05,120);camera.position.set(0,1.65,0);scene.add(camera);scene.environmentIntensity=.5;
+ const item=new T.Mesh(new T.BoxGeometry(),new T.MeshBasicMaterial());item.position.set(2,4.4,-3);scene.add(item);
+ let pulses=0;const grip=new T.Group();grip.position.set(0,1.6,-.4);scene.add(grip);const vr={rightHand:{grip,source:{handedness:'right',gamepad:{hapticActuators:[{pulse(){pulses++;return Promise.resolve(true);}}]}}}};
+ const story=new EarthquakeStory({scene,camera,renderer:{xr:{isPresenting:xr,getCamera:()=>camera}},world:{storyObjects:[item],spawn:new T.Vector3(),zone:()=> '교실'},vr,notify:()=>{}});
+ story.start();story.update(0,true);return {story,item,camera,scene,pulses:()=>pulses};
+}
+test('PC confirmation drives quake, preserves camera and restores original furniture/light on reset',()=>{const {story,item,camera,scene}=setup(),base=item.position.clone(),pose=camera.matrix.clone();assert.equal(story.handlePC(),false);story.update(3,true);assert.equal(story.handlePC(),true);story.update(1,true);assert.equal(story.clock.phase,'confirmed');story.update(2.01,true);assert.equal(story.clock.phase,'earthquake');assert.ok(item.position.distanceTo(base)>0&&item.position.distanceTo(base)<.012);assert.deepEqual(camera.matrix.elements,pose.elements);story.reset();assert.ok(item.position.equals(base));assert.equal(scene.environmentIntensity,.5);assert.equal(story.clock.phase,'peaceful');story.dispose();});
+test('tracked right grip carries phone, pulses once and confirms only after sustained headset gaze',()=>{const {story,camera,pulses}=setup(true);story.update(3,true);assert.equal(pulses(),1);assert.equal(story.phone.root.parent,story.vr.rightHand.grip);camera.rotation.y=Math.PI;story.update(1,true);assert.equal(story.clock.phase,'alert');camera.rotation.y=0;story.update(.4,true);assert.equal(story.clock.phase,'alert');story.update(.4,true);assert.equal(story.clock.phase,'confirmed');story.update(10,false);assert.equal(story.clock.phase,'confirmed');story.dispose();});

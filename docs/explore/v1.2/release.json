@@ -1,0 +1,17 @@
+{
+  "version": "1.2",
+  "date": "2026-11-17",
+  "removed": "West dark-roof annex; measured bbox [-43.24,1.4,-43.41]..[-7.3,19.35,-20.81]",
+  "preserved": "L-shaped main building, 24 original classroom doorways, both staircases, grounds and textures",
+  "doorMotion": "two original leaves translate outward along doorway plane, no rotation; swept body collision preserved",
+  "renderBeforeBytes": 360588272,
+  "renderAfterBytes": 204109372,
+  "collisionBeforeBytes": 82224288,
+  "collisionAfterBytes": 21385248,
+  "tests": 78,
+  "questHardwareTested": false,
+  "zipBeforeBytes": 151151084,
+  "zipAfterBytes": 148928292,
+  "appWebBytes": 253896988,
+  "appWebBeforeBytes": 471063595
+}

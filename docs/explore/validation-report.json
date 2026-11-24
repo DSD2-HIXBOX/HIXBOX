@@ -1,0 +1,19 @@
+{
+  "tests": 88,
+  "passed": 88,
+  "failed": 0,
+  "build": "passed",
+  "browser": [
+    "photographed corridor pillar gap closed",
+    "adjacent classroom gap closed",
+    "original wall positions/UV/materials preserved"
+  ],
+  "questHardwareTested": false,
+  "zipIntegrity": "passed",
+  "sourceSHA256": "286169fa0366ccc68c850c01306096f9363bf0908c224c7ed26dd11ff5480d89",
+  "version": "1.6",
+  "zipBytes": 149090124,
+  "nativeAppVersion": "1.6",
+  "nativeLaunchTested": false,
+  "finalPreviewFPS": 60.0
+}

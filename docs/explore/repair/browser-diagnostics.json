@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-11",
+  "environment": "Codex in-app browser / Apple M2 ANGLE Metal",
+  "normal": {
+    "fps": 60.0,
+    "drawCalls": 307,
+    "triangles": 443624,
+    "cpuMs": 4.3
+  },
+  "pcActive": {
+    "fps": 60.0,
+    "drawCalls": 296,
+    "triangles": 443492,
+    "cpuMs": 9.9,
+    "physicsMs": 8.3
+  },
+  "renderOffControl": {
+    "fps": 60.0,
+    "drawCalls": 0,
+    "triangles": 0,
+    "cpuMs": 0.2
+  },
+  "earlierObservation": {
+    "fpsRange": [
+      13.6,
+      15.7
+    ],
+    "cause": "Not reproduced in final single-tab test; cannot attribute conclusively."
+  },
+  "visualChecks": [
+    "south stairs",
+    "north stairs",
+    "flag removed with adjacent posters preserved",
+    "PC start and E open"
+  ],
+  "questHardwareTested": false
+}

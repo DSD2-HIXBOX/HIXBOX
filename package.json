@@ -1,0 +1,27 @@
+{
+  "name": "earthquake-vr",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "dev:https": "vite --host 127.0.0.1 --mode https",
+    "prepare:corridor": "node scripts/prepare-corridor.mjs",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "node --test tests/*.test.js",
+    "prepare:school": "node scripts/prepare-unified-school.mjs",
+    "prepare:explore": "node scripts/explore/analyze-doors.mjs && node scripts/explore/configure-doors.mjs && node scripts/explore/repair-model.mjs && node scripts/explore/build-navigation.mjs && node scripts/explore/prepare-collision.mjs && node scripts/explore/batch-model.mjs && node scripts/explore/repair-wall-sides.mjs && node scripts/explore/compress-model.mjs",
+    "prepare:edited": "node scripts/explore/prepare-edited-model.mjs",
+    "compress:explore": "node scripts/explore/compress-model.mjs"
+  },
+  "dependencies": {
+    "brotli": "^1.3.3",
+    "meshoptimizer": "^1.3.0",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-basic-ssl": "^2.1.0",
+    "vite": "^7.1.0"
+  }
+}

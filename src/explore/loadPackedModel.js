@@ -1,0 +1,7 @@
+export async function loadPackedModel(loader,base,progress){
+ const response=await fetch(base+'model-parts.json');if(!response.ok)throw Error('모델 파일 목록을 읽지 못했습니다.');const manifest=await response.json(),pieces=[];let loaded=0;
+ for(const part of manifest.parts){const r=await fetch(base+part.file);if(!r.ok)throw Error('모델 파일을 읽지 못했습니다: '+part.file);const buffer=await r.arrayBuffer();if(buffer.byteLength!==part.bytes)throw Error('모델 파일 크기 불일치');pieces.push(new Uint8Array(buffer));loaded+=buffer.byteLength;progress('학교 모델 불러오는 중 · '+Math.round(loaded/manifest.compressedBytes*100)+'%',5+loaded/manifest.compressedBytes*70);}
+ const encoded=new Uint8Array(loaded);let offset=0;for(const p of pieces){encoded.set(p,offset);offset+=p.length;}pieces.length=0;progress('학교 모델 압축 해제 중…',77);
+ const buffer=await new Promise((resolve,reject)=>{const worker=new Worker(new URL('./model-decode.worker.js',import.meta.url),{type:'module'});worker.onmessage=({data})=>{worker.terminate();data.error?reject(Error(data.error)):resolve(data.buffer);};worker.onerror=e=>{worker.terminate();reject(Error(e.message));};worker.postMessage({buffer:encoded.buffer,bytes:manifest.modelBytes},[encoded.buffer]);});
+ const digest=await crypto.subtle.digest('SHA-256',buffer),hex=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');if(hex!==manifest.sha256)throw Error('모델 무결성 검사 실패');return loader.parseAsync(buffer,base);
+}
