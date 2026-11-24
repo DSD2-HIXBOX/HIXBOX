@@ -132,8 +132,9 @@ export class FireEscapeEffects {
     this.windowOutline.rotation.y = Math.PI / 2;
 
     this.belongings = new THREE.Group();
-    // The original desktop at this location is 6.495 m above the model origin.
-    this.belongings.position.set(35.25, 6.5, -8.13);
+    // The rendered wood top is above the simplified collision surface.
+    const desktopHeight = 6.637;
+    this.belongings.position.set(35.25, desktopHeight + .007, -8.13);
     const book = new THREE.Group();
     book.position.set(-.14, 0, .015);
     book.rotation.y = -.16;
