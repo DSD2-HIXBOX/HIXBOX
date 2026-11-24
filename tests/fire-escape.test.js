@@ -3,11 +3,19 @@ import assert from 'node:assert/strict';
 import {gzipSync} from 'node:zlib';
 import {ANNOUNCEMENT_SECONDS, FireEscapeStory, INTRO_SECONDS, WINDOW_SECONDS} from '../src/story/FireEscapeStory.js';
 import {collisionBytes} from '../src/story/FireEscapeWorld.js';
+import {smokeDensity} from '../src/story/FireEscapeEffects.js';
 
 const noInput = {nearDoor: false, lookingAtWindow: false, lowReady: false};
 const arrival = {...noInput, nearDoor: true};
 const gaze = {...noInput, lookingAtWindow: true};
 const lowered = {...noInput, lowReady: true};
+
+test('smoke is present at startup and keeps thickening without a stage change', () => {
+  const densities = [0, 6, 18, 36, 60, 75].map(smokeDensity);
+  assert(densities[0] >= .5);
+  assert(densities.every((density, index) => index === 0 || density > densities[index - 1]));
+  assert.equal(smokeDensity(180), densities.at(-1));
+});
 
 test('alarm and announcement precede free movement to the door', () => {
   const story = new FireEscapeStory();

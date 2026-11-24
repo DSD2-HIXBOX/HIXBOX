@@ -6,6 +6,11 @@ export const WINDOW = new THREE.Box3(
   new THREE.Vector3(38.73, 8.00, -6.17),
 );
 
+export function smokeDensity(elapsed) {
+  return .52 + .55 * THREE.MathUtils.smoothstep(elapsed, 0, 22)
+    + .48 * THREE.MathUtils.smoothstep(elapsed, 8, 75);
+}
+
 function rectangle(width, height, color) {
   const frame = new THREE.Shape();
   const hole = new THREE.Path();
@@ -235,7 +240,8 @@ export class FireEscapeEffects {
   }
 
   update(story, camera, dt) {
-    const time = story.smokeSeconds;
+    const time = story.elapsed;
+    const alarmTime = story.smokeSeconds;
     const shimmer = .78 + .18 * Math.sin(story.elapsed * 3);
     this.doorOutline.visible = story.alarm && story.step <= 3 && this.door.progress < .8;
     for (const {outline} of this.belongingOutlines) outline.visible = story.canSelectBelongings;
@@ -246,19 +252,18 @@ export class FireEscapeEffects {
       sparkle.material.opacity = pulse * .76;
       sparkle.scale.setScalar(.48 + pulse * .52);
     });
-    const ringing = story.alarm && time < 9;
+    const ringing = story.alarm && alarmTime < 9;
     this.alarm.visible = ringing;
     this.lens.material.emissive.setHex(ringing ? 0xff3c39 : 0);
-    this.lens.material.emissiveIntensity = ringing ? .24 + .58 * (.5 + .5 * Math.sin(time * 4.5)) : 0;
+    this.lens.material.emissiveIntensity = ringing ? .24 + .58 * (.5 + .5 * Math.sin(alarmTime * 4.5)) : 0;
     this.rings.forEach((ring, index) => {
       ring.visible = ringing;
-      const wave = (time / 1.8 + index * .5) % 1;
+      const wave = (alarmTime / 1.8 + index * .5) % 1;
       ring.scale.setScalar(1 + wave * 2.7);
       ring.material.opacity = (1 - wave) * .62;
     });
 
-    const intensity = [0, .4, .83, 1.25, 1.32][story.step];
-    const strength = intensity * Math.min(1, time / 6);
+    const strength = smokeDensity(time);
     this.sourceRoom.forEach((cloud, index) => {
       const seed = cloud.userData.seed;
       const drift = (seed + time * .078) % 1;
@@ -275,18 +280,18 @@ export class FireEscapeEffects {
     });
     this.corridor.forEach((cloud, index) => {
       const seed = cloud.userData.seed;
-      const nearWindow = index < 5;
+      const nearWindow = index < 8;
       const cycle = (seed + time * (.025 + (index % 4) * .003)) % 1;
-      const reach = Math.min(11, 2.8 + time * .72);
+      const reach = THREE.MathUtils.lerp(4.5, 11, THREE.MathUtils.smoothstep(time, 0, 64));
       const z = nearWindow ? -9.65 + cycle * 2.4 : this.sourceDoorZ + cycle * reach;
       const density = THREE.MathUtils.lerp(1, .30, cycle);
       this.cloud(cloud, camera, 39.07 + (index % 6) * .28, 7.05 + seed * 1.3, z,
         1.48 + seed * 2.35, .75 + seed * .84,
-        Math.min(.96, strength * density * Math.sin(Math.PI * cycle) * (nearWindow ? .48 : 1)), time);
+        Math.min(.96, strength * density * Math.sin(Math.PI * cycle) * (nearWindow ? .72 : 1)), time);
     });
 
-    if (story.step === 4) this.indoorTime += dt;
     const doorOpening = this.door.progress;
+    if (story.step === 4 || doorOpening > .15) this.indoorTime += dt;
     this.flames.forEach((flame, index) => {
       flame.visible = story.alarm && doorOpening > .28;
       if (!flame.visible) return;
@@ -310,7 +315,7 @@ export class FireEscapeEffects {
       const seed = cloud.userData.seed;
       const age = (seed + this.indoorTime * .029) % 1;
       const reach = Math.min(3.6, this.indoorTime * .32);
-      const influx = Math.min(1, this.indoorTime / 9);
+      const influx = THREE.MathUtils.smoothstep(this.indoorTime, 0, 32);
       const opacity = influx * (.08 + doorOpening * .43) * Math.sin(Math.PI * age);
       this.cloud(cloud, camera, 38.52 - age * reach, 8.01 + seed * .34,
         this.door.openingCenter.z + age * seed * 3.5, 1 + seed * 1.5, .64 + .28 * seed, opacity, time);
