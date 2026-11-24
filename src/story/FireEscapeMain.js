@@ -152,7 +152,7 @@ async function main() {
     if (story.step !== 3 || classroomDoor.progress < .7 || rig.position.x < 38.65) return false;
     camera.getWorldPosition(ray.origin);
     camera.getWorldDirection(ray.direction);
-    point.copy(effects.fireOrigin).add(new THREE.Vector3(0, 1.2, 0)).sub(ray.origin);
+    point.copy(effects.smokeSight).sub(ray.origin);
     const distance = point.length();
     if (!distance || distance > 7 || ray.direction.dot(point.normalize()) < .94) return false;
     wallCheck.set(ray.origin, point);

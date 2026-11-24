@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
 
 export const WINDOW = new THREE.Box3(
   new THREE.Vector3(38.60, 7.07, -8.77),
@@ -133,18 +134,45 @@ export class FireEscapeEffects {
     this.belongings = new THREE.Group();
     // The original desktop at this location is 6.495 m above the model origin.
     this.belongings.position.set(35.25, 6.5, -8.13);
-    boxPiece(this.belongings, [.17, .027, .16], [-.15, .0135, 0], 0x577ca0);
-    boxPiece(this.belongings, [.14, .038, .085], [.025, .019, .055], 0xd18a9a);
-    boxPiece(this.belongings, [.072, .016, .129], [.16, .008, -.018], 0x3f4b57);
-    this.deskOutline = rectangle(.51, .22, 0xcfe3ff);
-    this.deskOutline.position.set(0, .044, 0);
-    this.deskOutline.rotation.x = -Math.PI / 2;
-    this.belongings.add(this.deskOutline);
+    const book = new THREE.Group();
+    book.position.set(-.14, 0, .015);
+    book.rotation.y = -.16;
+    boxPiece(book, [.22, .034, .18], [0, .017, 0], 0xe6ddbd);
+    for (const y of [.004, .034]) boxPiece(book, [.232, .008, .19], [0, y, 0], 0x507eb4);
+    boxPiece(book, [.10, .002, .044], [0, .039, -.025], 0xaed6ed);
+    const bag = new THREE.Group();
+    bag.position.set(.12, 0, -.015);
+    bag.rotation.y = .24;
+    const shell = new THREE.Mesh(
+      new RoundedBoxGeometry(.242, .122, .23, 3, .046),
+      new THREE.MeshStandardMaterial({color: 0x8c5277, roughness: .93}),
+    );
+    shell.position.y = .061;
+    bag.add(shell);
+    boxPiece(bag, [.15, .023, .092], [0, .102, .057], 0xb6719b);
+    boxPiece(bag, [.125, .009, .012], [0, .117, .06], 0x4b324e);
+    boxPiece(bag, [.026, .013, .028], [.049, .12, .059], 0xe4d5c8);
+    boxPiece(bag, [.082, .026, .027], [0, .052, -.109], 0x4b324e);
 
-    this.markers = [this.doorOutline, this.windowOutline, this.deskOutline].map(outline => {
+    this.belongingOutlines = [
+      {object: book, outline: rectangle(.246, .207, 0xd6eaff), height: .045},
+      {object: bag, outline: rectangle(.264, .255, 0xd6eaff), height: .13},
+    ];
+    for (const {object, outline, height} of this.belongingOutlines) {
+      outline.position.y = height;
+      outline.rotation.x = -Math.PI / 2;
+      object.add(outline);
+      this.belongings.add(object);
+    }
+
+    this.markers = [
+      {outline: this.doorOutline, offset: new THREE.Vector3(.37, .67, .025)},
+      {outline: this.windowOutline, offset: new THREE.Vector3(.76, .31, .025)},
+      ...this.belongingOutlines.map(({outline}) => ({outline, offset: new THREE.Vector3(.08, .07, .02)})),
+    ].map(({outline, offset}) => {
       const sparkle = glint();
       outline.add(sparkle);
-      sparkle.position.set(0, outline === this.deskOutline ? .07 : .23, .02);
+      sparkle.position.copy(offset);
       return {outline, sparkle};
     });
 
@@ -158,11 +186,17 @@ export class FireEscapeEffects {
 
     this.texture = smokeTexture();
     this.geometry = new THREE.PlaneGeometry(1, 1);
-    this.corridor = this.addSmoke(25, bounds(38.78, 40.98, 6.75, 8.53, -20, -1.55), 0x777578);
+    // The neighboring classroom occupies the west side of the wall (x < 38.62).
+    // Its existing door frame spans z=-14.75 to -13.40 in the school model.
+    this.fireOrigin = new THREE.Vector3(38.03, 5.75, -12.92);
+    this.sourceDoorZ = -14.08;
+    this.smokeSight = new THREE.Vector3(39.45, 7.56, -12.7);
+    this.sourceRoom = this.addSmoke(12, bounds(35.5, 38.63, 6.58, 8.6, -14.96, -10.7), 0x545257);
+    this.sourceDoor = this.addSmoke(7, bounds(38.46, 39.42, 6.78, 8.13, -14.73, -13.4), 0x57555b);
+    this.corridor = this.addSmoke(28, bounds(38.77, 40.98, 6.67, 8.57, -20, -1.55), 0x66646a);
     this.room = this.addSmoke(12, bounds(34.4, 38.70, 7.58, 8.52, -10.05, -4.75), 0x888487);
     const openingZ = door.openingCenter.z;
     this.seam = this.addSmoke(4, bounds(38.45, 39.1, max[1] - .15, max[1] + .09, openingZ - .28, openingZ + .28), 0x888487);
-    this.fireOrigin = new THREE.Vector3(39.7, 5.75, door.openingCenter.z - 3.6);
     this.flames = Array.from({length: 3}, (_, index) => {
       const flame = new THREE.Mesh(this.geometry, flameMaterial(index * 2.3));
       this.root.add(flame);
@@ -189,7 +223,7 @@ export class FireEscapeEffects {
     this.indoorTime = 0;
     for (const flame of this.flames) flame.visible = false;
     this.rings.forEach(ring => { ring.visible = false; });
-    for (const cloud of [...this.corridor, ...this.room, ...this.seam]) cloud.visible = false;
+    for (const cloud of [...this.sourceRoom, ...this.sourceDoor, ...this.corridor, ...this.room, ...this.seam]) cloud.visible = false;
     for (const {outline} of this.markers) outline.visible = false;
     this.alarm.visible = false;
     this.lens.material.emissive.setHex(0);
@@ -199,7 +233,7 @@ export class FireEscapeEffects {
     const time = story.smokeSeconds;
     const shimmer = .78 + .18 * Math.sin(story.elapsed * 3);
     this.doorOutline.visible = (story.step === 2 || story.step === 3) && this.door.progress < .8;
-    this.deskOutline.visible = story.step === 2;
+    for (const {outline} of this.belongingOutlines) outline.visible = story.step === 2;
     this.windowOutline.visible = story.step === 3;
     this.markers.forEach(({outline, sparkle}, index) => {
       const pulse = Math.max(0, Math.sin(story.elapsed * 2.7 + index * 2)) ** 3;
@@ -218,18 +252,32 @@ export class FireEscapeEffects {
       ring.material.opacity = (1 - wave) * .62;
     });
 
-    const expected = [0, .30, .73, 1.12, 1.27][story.step];
-    const strength = expected * Math.min(1, time / 8);
+    const intensity = [0, .4, .83, 1.25, 1.32][story.step];
+    const strength = intensity * Math.min(1, time / 6);
+    this.sourceRoom.forEach((cloud, index) => {
+      const seed = cloud.userData.seed;
+      const drift = (seed + time * .078) % 1;
+      this.cloud(cloud, camera, 37.18 + drift * 1.08, 6.95 + seed * 1.44,
+        this.fireOrigin.z - (index % 4) * .54, 1.45 + seed * 1.65, .78 + seed * .82,
+        Math.min(.93, strength) * Math.sin(Math.PI * drift) * .9, time);
+    });
+    this.sourceDoor.forEach(cloud => {
+      const seed = cloud.userData.seed;
+      const drift = (seed + time * .115) % 1;
+      this.cloud(cloud, camera, 38.52 + drift * .76, 7.35 + seed * .45,
+        this.sourceDoorZ + (seed - .5) * .53, 1.32, .63 + seed * .42,
+        Math.min(.94, strength) * Math.sin(Math.PI * drift), time);
+    });
     this.corridor.forEach((cloud, index) => {
       const seed = cloud.userData.seed;
-      const nearWindow = index < 4;
-      const cycle = (seed + time * (.019 + (index % 4) * .003)) % 1;
-      const reach = Math.min(12, 3.4 + time * .57);
-      const z = nearWindow ? -9.75 + cycle * 2.4 : this.fireOrigin.z - 2.5 + cycle * reach;
-      const density = THREE.MathUtils.lerp(.98, .27, cycle);
-      this.cloud(cloud, camera, 39.22 + (index % 5) * .24, 7.05 + seed * 1.25, z,
-        1.25 + seed * 2, .6 + seed * .72,
-        strength * density * Math.sin(Math.PI * cycle) * (nearWindow ? .36 : .78), time);
+      const nearWindow = index < 5;
+      const cycle = (seed + time * (.025 + (index % 4) * .003)) % 1;
+      const reach = Math.min(11, 2.8 + time * .72);
+      const z = nearWindow ? -9.65 + cycle * 2.4 : this.sourceDoorZ + cycle * reach;
+      const density = THREE.MathUtils.lerp(1, .30, cycle);
+      this.cloud(cloud, camera, 39.07 + (index % 6) * .28, 7.05 + seed * 1.3, z,
+        1.48 + seed * 2.35, .75 + seed * .84,
+        Math.min(.96, strength * density * Math.sin(Math.PI * cycle) * (nearWindow ? .48 : 1)), time);
     });
 
     if (story.step === 4) this.indoorTime += dt;
@@ -237,11 +285,11 @@ export class FireEscapeEffects {
     this.flames.forEach((flame, index) => {
       flame.visible = story.alarm && doorOpening > .28;
       if (!flame.visible) return;
-      const height = 1.22 + index * .18;
+      const height = 1.52 + index * .19;
       flame.position.copy(this.fireOrigin);
-      flame.position.x += (index - 1) * .32;
+      flame.position.x += (index - 1) * .19;
       flame.position.y += height * .53;
-      flame.position.z += index * .19;
+      flame.position.z += (index - 1) * .32;
       flame.scale.set(.68 + index * .06, height, 1);
       flame.quaternion.copy(camera.quaternion);
       flame.material.uniforms.time.value = time;
