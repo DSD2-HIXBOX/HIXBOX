@@ -100,7 +100,7 @@ async function main() {
   }
 
   pc.onPrimary = () => {
-    if (story.step === 4 && doorTarget) {
+    if (story.step >= 2 && doorTarget) {
       interaction.activate(doorTarget);
       audio.select();
     }
@@ -148,6 +148,19 @@ async function main() {
     });
   }
 
+  function checkOpenHallway() {
+    if (story.step !== 3 || classroomDoor.progress < .7 || rig.position.x < 38.65) return false;
+    camera.getWorldPosition(ray.origin);
+    camera.getWorldDirection(ray.direction);
+    point.copy(effects.fireOrigin).add(new THREE.Vector3(0, 1.2, 0)).sub(ray.origin);
+    const distance = point.length();
+    if (!distance || distance > 7 || ray.direction.dot(point.normalize()) < .94) return false;
+    wallCheck.set(ray.origin, point);
+    wallCheck.far = distance - .25;
+    return !wallCheck.intersectObjects(world.interactionWorld.occluders, false).some(hit =>
+      !world.interactionWorld.ignoreOccluderHit?.(hit) && !(hit.object.material.transparent && hit.object.material.opacity < .35));
+  }
+
   reset();
   setStatus('화면과 조명을 준비하는 중…');
   await renderer.compileAsync(scene, camera);
@@ -162,7 +175,7 @@ async function main() {
       pc.update(dt, rig, collision);
       smoothEye.update(Math.min(elapsed, .15), rig.position.y, camera);
       camera.updateWorldMatrix(true, false);
-      const lookingAtWindow = checkWindow();
+      const lookingAtWindow = checkWindow() || checkOpenHallway();
       const nearDoor = rig.position.x < classroomDoor.config.min[0] &&
         Math.hypot(rig.position.x - classroomDoor.openingCenter.x, rig.position.z - classroomDoor.openingCenter.z) < 1.8;
       const alarmWasOn = story.alarm;
@@ -171,7 +184,7 @@ async function main() {
         lowReady: collision.height <= LOW_HEIGHT && Math.abs(camera.position.y - LOW_EYE) < .025,
       });
       if (!alarmWasOn && story.alarm) audio.playAlarm();
-      doorTarget = story.step === 4 && story.lowering ? interaction.fromCamera(camera) : null;
+      doorTarget = story.step >= 2 ? interaction.fromCamera(camera) : null;
       effects.update(story, camera, elapsed);
       ui.update(story, lookingAtWindow || doorTarget);
       world.doors.update(dt, rig.position);

@@ -6,11 +6,23 @@ export const WINDOW = new THREE.Box3(
 );
 
 function rectangle(width, height, color) {
-  const points = [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([x, y]) =>
-    new THREE.Vector3(x * width / 2, y * height / 2, 0));
-  return new THREE.LineLoop(
-    new THREE.BufferGeometry().setFromPoints(points),
-    new THREE.LineBasicMaterial({color, transparent: true, depthWrite: false}),
+  const frame = new THREE.Shape();
+  const hole = new THREE.Path();
+  const inset = .014;
+  frame.moveTo(-width / 2, -height / 2);
+  frame.lineTo(width / 2, -height / 2);
+  frame.lineTo(width / 2, height / 2);
+  frame.lineTo(-width / 2, height / 2);
+  frame.closePath();
+  hole.moveTo(-width / 2 + inset, -height / 2 + inset);
+  hole.lineTo(-width / 2 + inset, height / 2 - inset);
+  hole.lineTo(width / 2 - inset, height / 2 - inset);
+  hole.lineTo(width / 2 - inset, -height / 2 + inset);
+  hole.closePath();
+  frame.holes.push(hole);
+  return new THREE.Mesh(
+    new THREE.ShapeGeometry(frame),
+    new THREE.MeshBasicMaterial({color, transparent: true, depthWrite: false, toneMapped: false, side: THREE.DoubleSide}),
   );
 }
 
@@ -63,6 +75,39 @@ function smokeTexture() {
   return new THREE.CanvasTexture(canvas);
 }
 
+function flameMaterial(seed) {
+  return new THREE.ShaderMaterial({
+    uniforms: {time: {value: 0}, seed: {value: seed}, reveal: {value: 0}},
+    transparent: true, depthWrite: false, toneMapped: false, side: THREE.DoubleSide,
+    vertexShader: `
+      varying vec2 flameUV;
+      void main() {
+        flameUV = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      varying vec2 flameUV;
+      uniform float time;
+      uniform float seed;
+      uniform float reveal;
+      void main() {
+        float y = flameUV.y;
+        float sway = sin(y * 8.0 - time * 5.0 + seed) * 0.13 * y;
+        float x = abs(flameUV.x - 0.5 + sway);
+        float width = 0.46 * pow(1.0 - y, 0.7);
+        float edge = 1.0 - smoothstep(width * 0.28, width + 0.02, x);
+        float tail = 1.0 - smoothstep(0.53, 0.94, y + 0.08 * sin(time * 4.0 + seed));
+        float opacity = edge * tail * smoothstep(0.0, 0.14, y) * reveal;
+        vec3 orange = vec3(1.0, 0.28, 0.035);
+        vec3 yellow = vec3(1.0, 0.86, 0.36);
+        vec3 color = mix(orange, yellow, edge * (1.0 - y));
+        gl_FragColor = vec4(color, opacity * 0.92);
+      }
+    `,
+  });
+}
+
 const bounds = (x0, x1, y0, y1, z0, z1) => [
   new THREE.Plane(new THREE.Vector3(1, 0, 0), -x0),
   new THREE.Plane(new THREE.Vector3(-1, 0, 0), x1),
@@ -79,16 +124,27 @@ export class FireEscapeEffects {
     this.door = door;
     const {min, max} = door.config;
     this.doorOutline = rectangle(max[2] - min[2], max[1] - min[1], 0xaecfff);
-    this.doorOutline.position.set(min[0] - .035, (min[1] + max[1]) / 2, (min[2] + max[2]) / 2);
+    this.doorOutline.position.set(min[0] - .13, (min[1] + max[1]) / 2, (min[2] + max[2]) / 2);
     this.doorOutline.rotation.y = Math.PI / 2;
     this.windowOutline = rectangle(2.63, .96, 0xbfdaff);
-    this.windowOutline.position.set(38.56, 7.54, -7.47);
+    this.windowOutline.position.set(38.48, 7.54, -7.47);
     this.windowOutline.rotation.y = Math.PI / 2;
 
-    this.markers = [this.doorOutline, this.windowOutline].map(outline => {
+    this.belongings = new THREE.Group();
+    // The original desktop at this location is 6.495 m above the model origin.
+    this.belongings.position.set(35.25, 6.5, -8.13);
+    boxPiece(this.belongings, [.17, .027, .16], [-.15, .0135, 0], 0x577ca0);
+    boxPiece(this.belongings, [.14, .038, .085], [.025, .019, .055], 0xd18a9a);
+    boxPiece(this.belongings, [.072, .016, .129], [.16, .008, -.018], 0x3f4b57);
+    this.deskOutline = rectangle(.51, .22, 0xcfe3ff);
+    this.deskOutline.position.set(0, .044, 0);
+    this.deskOutline.rotation.x = -Math.PI / 2;
+    this.belongings.add(this.deskOutline);
+
+    this.markers = [this.doorOutline, this.windowOutline, this.deskOutline].map(outline => {
       const sparkle = glint();
       outline.add(sparkle);
-      sparkle.position.set(.16, .23, .015);
+      sparkle.position.set(0, outline === this.deskOutline ? .07 : .23, .02);
       return {outline, sparkle};
     });
 
@@ -106,7 +162,13 @@ export class FireEscapeEffects {
     this.room = this.addSmoke(12, bounds(34.4, 38.70, 7.58, 8.52, -10.05, -4.75), 0x888487);
     const openingZ = door.openingCenter.z;
     this.seam = this.addSmoke(4, bounds(38.45, 39.1, max[1] - .15, max[1] + .09, openingZ - .28, openingZ + .28), 0x888487);
-    this.root.add(this.doorOutline, this.windowOutline, this.alarm);
+    this.fireOrigin = new THREE.Vector3(39.7, 5.75, door.openingCenter.z - 3.6);
+    this.flames = Array.from({length: 3}, (_, index) => {
+      const flame = new THREE.Mesh(this.geometry, flameMaterial(index * 2.3));
+      this.root.add(flame);
+      return flame;
+    });
+    this.root.add(this.doorOutline, this.windowOutline, this.belongings, this.alarm);
     this.reset();
   }
 
@@ -125,6 +187,7 @@ export class FireEscapeEffects {
 
   reset() {
     this.indoorTime = 0;
+    for (const flame of this.flames) flame.visible = false;
     this.rings.forEach(ring => { ring.visible = false; });
     for (const cloud of [...this.corridor, ...this.room, ...this.seam]) cloud.visible = false;
     for (const {outline} of this.markers) outline.visible = false;
@@ -134,8 +197,9 @@ export class FireEscapeEffects {
 
   update(story, camera, dt) {
     const time = story.smokeSeconds;
-    const shimmer = .50 + .26 * Math.sin(story.elapsed * 3);
-    this.doorOutline.visible = story.step === 2;
+    const shimmer = .78 + .18 * Math.sin(story.elapsed * 3);
+    this.doorOutline.visible = (story.step === 2 || story.step === 3) && this.door.progress < .8;
+    this.deskOutline.visible = story.step === 2;
     this.windowOutline.visible = story.step === 3;
     this.markers.forEach(({outline, sparkle}, index) => {
       const pulse = Math.max(0, Math.sin(story.elapsed * 2.7 + index * 2)) ** 3;
@@ -154,14 +218,14 @@ export class FireEscapeEffects {
       ring.material.opacity = (1 - wave) * .62;
     });
 
-    const expected = [0, .22, .52, .82, 1][story.step];
+    const expected = [0, .30, .73, 1.12, 1.27][story.step];
     const strength = expected * Math.min(1, time / 8);
     this.corridor.forEach((cloud, index) => {
       const seed = cloud.userData.seed;
       const nearWindow = index < 4;
       const cycle = (seed + time * (.019 + (index % 4) * .003)) % 1;
       const reach = Math.min(12, 3.4 + time * .57);
-      const z = nearWindow ? -9.75 + cycle * 2.4 : -16.3 + cycle * reach;
+      const z = nearWindow ? -9.75 + cycle * 2.4 : this.fireOrigin.z - 2.5 + cycle * reach;
       const density = THREE.MathUtils.lerp(.98, .27, cycle);
       this.cloud(cloud, camera, 39.22 + (index % 5) * .24, 7.05 + seed * 1.25, z,
         1.25 + seed * 2, .6 + seed * .72,
@@ -170,18 +234,31 @@ export class FireEscapeEffects {
 
     if (story.step === 4) this.indoorTime += dt;
     const doorOpening = this.door.progress;
+    this.flames.forEach((flame, index) => {
+      flame.visible = story.alarm && doorOpening > .28;
+      if (!flame.visible) return;
+      const height = 1.22 + index * .18;
+      flame.position.copy(this.fireOrigin);
+      flame.position.x += (index - 1) * .32;
+      flame.position.y += height * .53;
+      flame.position.z += index * .19;
+      flame.scale.set(.68 + index * .06, height, 1);
+      flame.quaternion.copy(camera.quaternion);
+      flame.material.uniforms.time.value = time;
+      flame.material.uniforms.reveal.value = THREE.MathUtils.smoothstep(doorOpening, .28, .85);
+    });
     this.seam.forEach(cloud => {
       const seed = cloud.userData.seed;
       this.cloud(cloud, camera, 38.79, this.door.config.max[1] - .04,
         this.door.openingCenter.z + seed * .26 - .13, .64, .23,
-        Math.min(this.indoorTime * .05, .24), time);
+        doorOpening * Math.min(this.indoorTime * .09, .4), time);
     });
     this.room.forEach(cloud => {
       const seed = cloud.userData.seed;
       const age = (seed + this.indoorTime * .029) % 1;
       const reach = Math.min(3.6, this.indoorTime * .32);
       const influx = Math.min(1, this.indoorTime / 9);
-      const opacity = influx * (.16 + doorOpening * .39) * Math.sin(Math.PI * age);
+      const opacity = influx * (.08 + doorOpening * .43) * Math.sin(Math.PI * age);
       this.cloud(cloud, camera, 38.52 - age * reach, 8.01 + seed * .34,
         this.door.openingCenter.z + age * seed * 3.5, 1 + seed * 1.5, .64 + .28 * seed, opacity, time);
     });

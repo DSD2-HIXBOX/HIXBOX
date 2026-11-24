@@ -1,8 +1,8 @@
 const stages = [
-  ['화재 발생', '화재가 발생했습니다.\n즉시 안전한 곳으로 대피하세요.', 'M3 9h4l5-4v14l-5-4H3z M15 9a4 4 0 0 1 0 6 M18 6a8 8 0 0 1 0 12'],
-  ['소지품 두고 대피하기', '소지품은 그대로 두고\n빛나는 교실 문 쪽으로 이동하세요.', 'M5 9h14v12H5z M9 9V6a3 3 0 0 1 6 0v3 M8 14h8'],
-  ['연기 방향 확인', '빛나는 창문을 잠시 바라보고\n연기가 오는 방향을 확인하세요.', 'M3 5h18v14H3z M12 5v14 M3 12h18'],
-  ['낮은 자세로 대피하기', '연기를 피해 낮은 자세를 취하세요.\nC 키를 누르면 몸을 숙일 수 있어요.', 'M5 7h14 M12 10v9 M8 15l4 4 4-4'],
+  ['화재 발생', '화재가 발생했습니다.\n교실에 화재경보가 울리고 있어요.', 'M3 9h4l5-4v14l-5-4H3z M15 9a4 4 0 0 1 0 6 M18 6a8 8 0 0 1 0 12'],
+  ['교실 안 상황', '화재경보가 울린 뒤,\n교실 안의 상황이 달라지고 있어요.', 'M5 9h14v12H5z M9 9V6a3 3 0 0 1 6 0v3 M8 14h8'],
+  ['복도 상황', '복도 한쪽에서 연기가 보이기 시작해요.', 'M3 5h18v14H3z M12 5v14 M3 12h18'],
+  ['번지는 연기', '연기가 교실 안쪽으로 스며들고 있어요.', 'M5 7h14 M12 10v9 M8 15l4 4 4-4'],
 ];
 export class FireEscapeUI {
   constructor() {
@@ -32,7 +32,7 @@ export class FireEscapeUI {
       this.title.textContent = title;
       this.segments.forEach((segment, index) => segment.classList.toggle('filled', index < story.step));
     }
-    const text = story.completed ? '낮은 자세로 대피할 준비가 되었어요.' : instruction;
+    const text = story.completed ? '여기까지의 체험을 마쳤어요.' : instruction;
     const alertKey = story.alarm ? text : '';
     if (alertKey !== this.alertKey) {
       const replacing = Boolean(this.alertKey);
