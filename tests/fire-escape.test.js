@@ -9,23 +9,17 @@ const arrival = {...noInput, nearDoor: true};
 const gaze = {...noInput, lookingAtWindow: true};
 const lowered = {...noInput, lowReady: true};
 
-test('alarm and announcement complete before choices; door approach requires the correct choice', () => {
+test('alarm and announcement precede free movement to the door', () => {
   const story = new FireEscapeStory();
   story.update(INTRO_SECONDS - 1, arrival);
   assert.equal(story.alarm, false);
   story.update(1, arrival);
   assert.equal(story.alarm, true);
-  assert.equal(story.choose(2), false);
+  assert.equal(story.lower(), false);
   story.update(ANNOUNCEMENT_SECONDS, {...arrival, announcementPlaying: true});
   assert.equal(story.step, 1);
   story.update(.1, arrival);
   assert.equal(story.step, 2);
-  assert.equal(story.choose(1), true);
-  story.update(2, arrival);
-  assert.deepEqual(story.answers[2], {correct: false, incorrect: 1});
-  assert.equal(story.step, 2);
-  assert.equal(story.choose(2), true);
-  assert.equal(story.choose(2), false);
   story.update(2, noInput);
   assert.equal(story.step, 2);
   story.update(.1, arrival);
@@ -36,7 +30,6 @@ test('window needs uninterrupted gaze; the low posture completes step 04 and res
   const story = new FireEscapeStory();
   story.update(INTRO_SECONDS, noInput);
   story.update(ANNOUNCEMENT_SECONDS, noInput);
-  story.choose(2);
   story.update(.1, arrival);
   story.update(WINDOW_SECONDS * .8, gaze);
   story.update(.1, noInput);
@@ -44,11 +37,10 @@ test('window needs uninterrupted gaze; the low posture completes step 04 and res
   assert.equal(story.step, 3);
   story.update(.5, gaze);
   assert.equal(story.step, 4);
-  story.choose(1);
   story.update(5, lowered);
-  assert.deepEqual(story.answers[4], {correct: false, incorrect: 1});
   assert.equal(story.completed, false);
-  story.choose(2);
+  assert.equal(story.lower(), true);
+  assert.equal(story.lower(), false);
   story.update(.1, noInput);
   assert.equal(story.lowering, true);
   assert.equal(story.completed, false);

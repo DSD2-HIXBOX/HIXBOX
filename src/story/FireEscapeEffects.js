@@ -29,7 +29,7 @@ function glint() {
   const points = [[-.075, 0], [.075, 0], [0, -.075], [0, .075]].map(([x, y]) => new THREE.Vector3(x, y, 0));
   return new THREE.LineSegments(
     new THREE.BufferGeometry().setFromPoints(points),
-    new THREE.LineBasicMaterial({color: 0xffedd3, transparent: true, depthWrite: false}),
+    new THREE.LineBasicMaterial({color: 0xe2efff, transparent: true, depthWrite: false}),
   );
 }
 
@@ -78,27 +78,14 @@ export class FireEscapeEffects {
     scene.add(this.root);
     this.door = door;
     const {min, max} = door.config;
-    this.doorOutline = rectangle(max[2] - min[2], max[1] - min[1], 0xffd8a0);
+    this.doorOutline = rectangle(max[2] - min[2], max[1] - min[1], 0xaecfff);
     this.doorOutline.position.set(min[0] - .035, (min[1] + max[1]) / 2, (min[2] + max[2]) / 2);
     this.doorOutline.rotation.y = Math.PI / 2;
-    this.windowOutline = rectangle(2.63, .96, 0xffe7b4);
+    this.windowOutline = rectangle(2.63, .96, 0xbfdaff);
     this.windowOutline.position.set(38.56, 7.54, -7.47);
     this.windowOutline.rotation.y = Math.PI / 2;
 
-    this.bag = new THREE.Group();
-    this.bag.position.set(35.92, 5.75, -7.28);
-    const body = new THREE.Mesh(
-      new THREE.SphereGeometry(1, 14, 10),
-      new THREE.MeshStandardMaterial({color: 0x415e78, roughness: .95}),
-    );
-    body.scale.set(.20, .31, .125);
-    body.position.y = .31;
-    this.bag.add(body);
-    boxPiece(this.bag, [.28, .22, .075], [0, .26, .108], 0x526f90);
-    boxPiece(this.bag, [.17, .018, .11], [.30, .018, .05], 0x987144);
-    this.bagOutline = rectangle(.49, .66, 0xffd8a0);
-    this.bagOutline.position.set(35.92, 6.06, -7.12);
-    this.markers = [this.bagOutline, this.doorOutline, this.windowOutline].map(outline => {
+    this.markers = [this.doorOutline, this.windowOutline].map(outline => {
       const sparkle = glint();
       outline.add(sparkle);
       sparkle.position.set(.16, .23, .015);
@@ -119,7 +106,7 @@ export class FireEscapeEffects {
     this.room = this.addSmoke(12, bounds(34.4, 38.70, 7.58, 8.52, -10.05, -4.75), 0x888487);
     const openingZ = door.openingCenter.z;
     this.seam = this.addSmoke(4, bounds(38.45, 39.1, max[1] - .15, max[1] + .09, openingZ - .28, openingZ + .28), 0x888487);
-    this.root.add(this.doorOutline, this.windowOutline, this.bag, this.bagOutline, this.alarm);
+    this.root.add(this.doorOutline, this.windowOutline, this.alarm);
     this.reset();
   }
 
@@ -141,13 +128,13 @@ export class FireEscapeEffects {
     this.rings.forEach(ring => { ring.visible = false; });
     for (const cloud of [...this.corridor, ...this.room, ...this.seam]) cloud.visible = false;
     for (const {outline} of this.markers) outline.visible = false;
+    this.alarm.visible = false;
     this.lens.material.emissive.setHex(0);
   }
 
   update(story, camera, dt) {
     const time = story.smokeSeconds;
     const shimmer = .50 + .26 * Math.sin(story.elapsed * 3);
-    this.bagOutline.visible = story.step === 2 && story.choiceOpen;
     this.doorOutline.visible = story.step === 2;
     this.windowOutline.visible = story.step === 3;
     this.markers.forEach(({outline, sparkle}, index) => {
@@ -156,8 +143,8 @@ export class FireEscapeEffects {
       sparkle.material.opacity = pulse * .76;
       sparkle.scale.setScalar(.48 + pulse * .52);
     });
-    this.bagOutline.quaternion.copy(camera.quaternion);
     const ringing = story.alarm && time < 9;
+    this.alarm.visible = ringing;
     this.lens.material.emissive.setHex(ringing ? 0xff3c39 : 0);
     this.lens.material.emissiveIntensity = ringing ? .24 + .58 * (.5 + .5 * Math.sin(time * 4.5)) : 0;
     this.rings.forEach((ring, index) => {

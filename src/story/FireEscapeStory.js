@@ -15,22 +15,12 @@ export class FireEscapeStory {
     this.smokeSeconds = 0;
     this.windowFocus = 0;
     this.completed = false;
-    this.answers = {2: {correct: false, incorrect: 0}, 4: {correct: false, incorrect: 0}};
+    this.lowering = false;
   }
 
-  get choiceOpen() {
-    return (this.step === 2 || this.step === 4) && !this.answers[this.step].correct;
-  }
-
-  get lowering() {
-    return this.answers[4].correct;
-  }
-
-  choose(choice) {
-    if (!this.choiceOpen || (choice !== 1 && choice !== 2)) return false;
-    const answer = this.answers[this.step];
-    if (choice === 2) answer.correct = true;
-    else answer.incorrect++;
+  lower() {
+    if (this.step !== 4 || this.lowering) return false;
+    this.lowering = true;
     return true;
   }
 
@@ -43,7 +33,7 @@ export class FireEscapeStory {
         this.announced = true;
         this.step = 2;
       }
-    } else if (this.step === 2 && this.answers[2].correct && nearDoor) {
+    } else if (this.step === 2 && nearDoor) {
       this.step = 3;
     } else if (this.step === 3) {
       this.windowFocus = lookingAtWindow ? Math.min(WINDOW_SECONDS, this.windowFocus + dt) : 0;

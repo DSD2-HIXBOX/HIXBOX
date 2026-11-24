@@ -4,7 +4,7 @@ import {ExploreInteraction} from '../explore/ExploreInteraction.js';
 import {SmoothEye} from '../explore/SmoothEye.js';
 import {FireEscapeAudio} from './FireEscapeAudio.js';
 import {FireEscapeEffects, WINDOW} from './FireEscapeEffects.js';
-import {FireEscapeStory, WINDOW_SECONDS} from './FireEscapeStory.js';
+import {FireEscapeStory} from './FireEscapeStory.js';
 import {FireEscapeUI} from './FireEscapeUI.js';
 import {loadFireEscapeWorld} from './FireEscapeWorld.js';
 import './FireEscape.css';
@@ -27,20 +27,18 @@ async function main() {
   const interaction = new ExploreInteraction(world.interactionWorld, () => {});
   const ray = new THREE.Ray();
   const point = new THREE.Vector3();
-  const choiceAnchor = new THREE.Vector3();
-  const projected = new THREE.Vector3();
-  const direction = new THREE.Vector3();
   const wallCheck = new THREE.Raycaster();
   let started = false;
   let playing = false;
-  let anchorSet = false;
   let doorTarget = null;
   let previousTime = 0;
 
   const posture = {
     crouched: false,
     updatePC() {},
-    toggle() {},
+    toggle() {
+      if (playing && story.lower()) audio.select();
+    },
   };
 
   function lowerPosture(elapsed) {
@@ -80,7 +78,6 @@ async function main() {
     pc.yaw = 0;
     pc.pitch = 0;
     pc.applyView();
-    anchorSet = false;
     doorTarget = null;
   }
 
@@ -102,15 +99,7 @@ async function main() {
     });
   }
 
-  function choose(number) {
-    if (!playing || !story.choose(number)) return false;
-    audio.select();
-    ui.update(story, '', null);
-    return true;
-  }
-
   pc.onPrimary = () => {
-    if (choose(ui.aim())) return true;
     if (story.step === 4 && doorTarget) {
       interaction.activate(doorTarget);
       audio.select();
@@ -121,10 +110,6 @@ async function main() {
   document.addEventListener('keydown', event => {
     if (!playing || event.repeat) return;
     if (event.code === 'KeyR') reset();
-    if (event.code === 'Digit1' || event.code === 'Digit2') choose(Number(event.key));
-  });
-  canvas.addEventListener('click', () => {
-    if (playing) choose(ui.aim());
   });
   element('start').addEventListener('click', begin);
   element('restart').addEventListener('click', () => {
@@ -148,30 +133,6 @@ async function main() {
     if (document.hidden) audio.stop();
   });
 
-  function updateChoiceAnchor() {
-    if (!story.choiceOpen) {
-      anchorSet = false;
-      return;
-    }
-    if (!anchorSet) {
-      camera.getWorldPosition(choiceAnchor);
-      camera.getWorldDirection(direction);
-      choiceAnchor.addScaledVector(direction, 3);
-      choiceAnchor.y -= .58;
-      anchorSet = true;
-    }
-    camera.getWorldPosition(point);
-    camera.getWorldDirection(direction);
-    const behind = point.subVectors(choiceAnchor, point).dot(direction) <= .12;
-    projected.copy(choiceAnchor).project(camera);
-    const offscreen = behind || Math.abs(projected.x) > 1.25 || Math.abs(projected.y) > 1.25;
-    ui.choices.classList.toggle('offscreen', offscreen);
-    if (!offscreen) {
-      ui.choices.style.setProperty('--choice-x', 50 + projected.x * 50 + '%');
-      ui.choices.style.setProperty('--choice-y', 50 - projected.y * 50 + '%');
-    }
-  }
-
   function checkWindow() {
     if (story.step !== 3 || rig.position.x >= WINDOW.min.x) return false;
     camera.getWorldPosition(ray.origin);
@@ -185,19 +146,6 @@ async function main() {
       return !(material.transparent && material.opacity < .35) &&
         !world.interactionWorld.ignoreOccluderHit?.(result);
     });
-  }
-
-  function hintFor(lookingAtWindow) {
-    if (story.choiceOpen) return '선택지에 조준하고 클릭 또는 E · 숫자 1 / 2';
-    if (story.step === 2) return '빛나는 교실 출입문 가까이 이동하세요.';
-    if (story.step === 3) return lookingAtWindow
-      ? '연기 방향 확인 중 · ' + Math.floor(100 * story.windowFocus / WINDOW_SECONDS) + '%'
-      : '조준점으로 빛나는 창문을 잠시 바라보세요.';
-    if (story.completed) return doorTarget
-      ? '낮은 자세로 대피할 준비가 되었어요. · ' + doorTarget.userData.interactionLabel()
-      : '낮은 자세로 대피할 준비가 되었어요.';
-    if (story.step === 4 && story.lowering) return '허리를 숙이는 중…';
-    return '';
   }
 
   reset();
@@ -224,9 +172,8 @@ async function main() {
       });
       if (!alarmWasOn && story.alarm) audio.playAlarm();
       doorTarget = story.step === 4 && story.lowering ? interaction.fromCamera(camera) : null;
-      updateChoiceAnchor();
       effects.update(story, camera, elapsed);
-      ui.update(story, hintFor(lookingAtWindow), lookingAtWindow || doorTarget);
+      ui.update(story, lookingAtWindow || doorTarget);
       world.doors.update(dt, rig.position);
     }
     world.render(dt);
