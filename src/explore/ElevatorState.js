@@ -1,0 +1,7 @@
+export class ElevatorState {
+ constructor(floors){this.floors=floors;this.floor=1;this.target=1;this.y=floors[1];this.progress=0;this.phase='closed';this.enabled=true;this.policy=()=>true;}
+ allowed(action,floor){return this.enabled&&this.policy({action,floor:floor+1,currentFloor:this.floor+1})!==false;}
+ request(floor,{inside=false}={}){if(!Number.isInteger(floor)||floor<0||floor>=this.floors.length||!this.allowed('travel',floor)||this.phase==='moving')return false;this.target=floor;if(floor===this.floor){this.phase=this.progress>.5?'closing':'opening';}else this.phase='closing';return true;}
+ toggle({inside=false}={}){if(this.phase==='moving'||!inside&&!this.allowed('door',this.floor))return false;this.target=this.floor;this.phase=this.progress>.5?'closing':'opening';return true;}
+ update(dt,{threshold=false}={}){dt=Math.min(Math.max(dt,0),.05);if(this.phase==='opening'){this.progress=Math.min(1,this.progress+dt/1.15);if(this.progress===1)this.phase='open';}else if(this.phase==='closing'){if(threshold){this.phase='opening';return;}this.progress=Math.max(0,this.progress-dt/1.15);if(this.progress===0)this.phase=this.target===this.floor?'closed':'moving';}else if(this.phase==='moving'){const goal=this.floors[this.target],d=goal-this.y,step=Math.sign(d)*Math.min(Math.abs(d),dt*1.1);this.y+=step;if(Math.abs(this.y-goal)<1e-6){this.y=goal;this.floor=this.target;this.phase='opening';}}}
+}

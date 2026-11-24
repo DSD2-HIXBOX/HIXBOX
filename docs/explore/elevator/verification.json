@@ -1,0 +1,19 @@
+{
+  "branch": "main",
+  "published": false,
+  "testsPassed": 94,
+  "browserChecks": {
+    "closedDoorStopsWalking": true,
+    "buttonEOpensDoors": true,
+    "openDoorAllowsEntry": true,
+    "rideSecondToFirst": true,
+    "rideFirstToFourth": true,
+    "exitFourthFloor": true
+  },
+  "sourceGLBUnchanged": true,
+  "collisionBinaryUnchanged": true,
+  "newAssetBytes": 143211,
+  "runtime": "PC only per latest request",
+  "scenarioControl": "setEnabled / setPolicy",
+  "limitations": "Cabin is new; original model has only landing facade. Legacy earthquake page remains archived."
+}
