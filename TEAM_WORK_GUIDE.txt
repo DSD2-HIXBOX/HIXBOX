@@ -1,0 +1,90 @@
+HIXBOX 공동 작업 가이드
+
+1. 기준과 현재 상태
+- main은 팀 전체가 사용하는 안정 버전입니다.
+- earthquake(지진 대피), fire-escape(화재 대피), extinguisher(소화기), flood(홍수)는 동일한 main에서 시작합니다.
+- 현재 기본 페이지 index.html → src/explore/main.js는 학교 자유 탐색입니다.
+- legacy.html → src/main.js → src/story/*에는 기존 지진 교육 기능이 있습니다.
+- 화재/소화기/홍수 전용 구현 파일과 4개 맵 선택 화면은 아직 없습니다. 브랜치를 만드는 것만으로 이 기능이 생기지 않습니다.
+- 이번 설정은 문서와 브랜치만 추가합니다. 기존 코드, 디자인, 모델 및 폴더 구조는 변경하지 않습니다.
+
+2. 담당 범위
+
+earthquake
+- 기존 지진 전용 파일: src/story/*
+- 전용 테스트: tests/story.test.js, shelter-state.test.js, shelter-integration.test.js, head-protection.test.js, evacuation.test.js
+- 전용 테스트 화면: tests/fixtures/step2.html, step3.html
+- 공용 후보인 HeadProtection.js, StoryAudio.js, Phone.js도 현재는 지진 담당. 다른 팀이 재사용할 때 파일 소유권/인터페이스를 먼저 합의합니다.
+- src/main.js, src/style.css, legacy.html은 기존 지진 페이지 진입점이지만 공용 연결 책임자와 조율 후 수정합니다.
+
+fire-escape
+- 현재 전용 파일 없음. src/story/FireEscape*.js, tests/fire-escape*.test.js처럼 고유 이름을 사용합니다.
+- 지진용 Evacuation*.js를 직접 수정하거나 이름만 바꾸지 않습니다.
+
+extinguisher
+- 현재 전용 파일 없음. src/story/Extinguisher*.js, tests/extinguisher*.test.js처럼 고유 이름을 사용합니다.
+
+flood
+- 현재 전용 파일 없음. src/story/Flood*.js, tests/flood*.test.js처럼 고유 이름을 사용합니다.
+
+새 기능의 파일 이름은 향후 구현 시 지킬 규칙이며 이번에 빈 파일/폴더를 생성하지 않습니다.
+기존 src/story 폴더를 유지합니다. 파일 경로 변경이나 폴더 이동은 별도 합의 없이 하지 않습니다.
+
+3. 공통 파일: 팀 전체가 동시에 수정하지 않기
+- index.html, src/explore/main.js, src/explore/style.css: 기본 시작 화면/학교 통합
+- src/main.js, src/style.css, legacy.html: 기존 지진 페이지 연결
+- src/input/*: PC/VR 입력
+- src/core/*: 공통 충돌, 자세, 상호작용
+- src/world/*: 기존 모델/교실/복도/계단 구성
+- src/explore/{ExploreCollision,CompactCollider,HingedDoors,ExploreInteraction,SmoothEye,OcclusionCuller,RenderAppearance,loadPackedModel,model-decode.worker}.js
+- public/models/*, source-models/*: 학교 모델과 재질/텍스처, 충돌/문/계단 데이터
+- public/audio/step3-announcement.wav: 기존 지진 음성. 교체는 지진 담당+통합 담당 합의
+- scripts/*, package*.json, vite*.js, .gitignore, .gitattributes, launcher/*: 빌드/모델 가공/의존성/패키징
+- 공통 모델/충돌/계단 테스트도 통합 담당이 관리합니다.
+
+팀은 통합 담당자 1명을 지정하세요. 공통 파일은 먼저 변경 의도를 알리고, 한 번에 한 담당자만 변경합니다.
+새 시나리오 연결은 전용 모듈 PR과 분리된 작은 통합 PR로 처리하세요.
+다른 팀의 전용 파일은 해당 담당자 동의 없이 수정하지 않습니다.
+전용 음성은 기존 public/audio에 fire-escape-, extinguisher-, flood- 접두어를 써서 충돌을 피하세요.
+새 3D 모델은 경로/크기/LFS 여부를 통합 담당자와 먼저 결정하세요. 기존 학교 GLB를 덮어쓰지 마세요.
+
+4. 처음 연결
+Git, Git LFS, Node.js 22.12 이상 필요:
+  git lfs install
+  git clone https://github.com/DSD2-HIXBOX/HIXBOX.git
+  cd HIXBOX
+  git switch --track origin/earthquake
+  git lfs pull
+  npm ci
+  npm run dev
+다른 팀은 earthquake 대신 담당 브랜치를 사용합니다. 이미 로컬 브랜치가 있으면 git switch 브랜치명.
+Codex에서는 복제한 HIXBOX 폴더를 열고 담당 브랜치인지 확인하세요.
+한 폴더에서 여러 사람이 동시에 브랜치를 바꾸지 마세요. 각자 별도로 복제합니다.
+
+5. 작업과 통합
+- 시작 전: git fetch origin, git switch 담당브랜치, git merge origin/main
+- 작업 중 변경 내용이 있으면 먼저 커밋하고 동기화하세요. 강제 초기화하지 마세요.
+- 한 커밋/PR에 한 기능만 넣으세요. 자동 포맷으로 무관한 파일을 바꾸지 마세요.
+- 공통 파일/의존성은 작은 별도 PR로 먼저 통합하세요. package-lock.json은 손으로 합치지 마세요.
+- 변경 내용 확인: git diff / git diff --cached
+- 저장/업로드: git add <수정파일>, git commit -m "기능 설명", git push -u origin 담당브랜치
+- GitHub에서 담당브랜치 → main Pull Request를 만드세요. main에 직접 푸시하거나 force push하지 마세요.
+- PR에 목적, 수정 파일, 공통 파일 변경, 새 에셋 용량, 검사 결과를 기록하세요.
+- 통합 담당자가 검토 후 한 PR씩 병합하고, 나머지 팀은 main을 다시 병합하세요.
+- 충돌은 담당자와 함께 해결하세요. 파일 전체를 한쪽 버전으로 덮어쓰지 마세요.
+
+6. 검사
+- npm ci / npm run build
+- 해당 기능 테스트 + 이동/문/충돌/층간 이동 확인
+- 기존 전체 테스트에 필요한 repaired-source.glb는 Git 제외 중간 파일입니다. 없으면 npm run prepare:explore 실행 후 npm test.
+- 모델 재생성은 통합 담당자만 합니다. 결과를 확인한 뒤 모델과 충돌/문/계단 데이터를 함께 올립니다.
+- PC는 실제 브라우저, VR은 Quest에서도 확인하세요. 장비 미검증은 PR에 명시합니다.
+- UI 연결 전 전용 모듈은 독립 테스트로 검증하며 기존 페이지를 임의로 교체하지 않습니다.
+
+7. LFS와 제외 파일
+- 기존 LFS 6개 약 1.2GB. clone 후 git lfs pull 필수.
+- 큰 파일 변경은 새 전체 버전을 저장하므로 자주 재출력하지 마세요.
+- 추가 파일은 25MiB 초과 시 LFS 검토, 100MiB 초과는 반드시 LFS 또는 배포 압축 방식.
+- node_modules, dist, backups, outputs, 환경 변수/인증서/토큰은 올리지 않습니다.
+- 키/토큰을 코드나 채팅에 넣지 마세요. 실제 비밀이 들어간 커밋은 즉시 담당자에게 알립니다.
+- 브랜치별 수정 범위는 협업 규칙이며 자동 접근 제한은 아닙니다. 이번에 보호 규칙/Actions/배포는 설정하지 않습니다.
