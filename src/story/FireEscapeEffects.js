@@ -48,9 +48,11 @@ function frameGlow(width, height) {
   return new THREE.Mesh(new THREE.PlaneGeometry(size.x, size.y), material);
 }
 
-function silhouetteGlow(geometry, height) {
+function silhouetteGlow(geometry, height = 0, worldScale = new THREE.Vector3(1, 1, 1)) {
   geometry.computeBoundingBox();
   const dimensions = geometry.boundingBox.getSize(new THREE.Vector3());
+  const center = geometry.boundingBox.getCenter(new THREE.Vector3());
+  const worldSize = dimensions.multiply(worldScale);
   const glow = new THREE.Group();
   for (const [spread, opacity, color] of [
     [.024, .045, 0x639bff],
@@ -62,13 +64,26 @@ function silhouetteGlow(geometry, height) {
     const shell = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({
       color, transparent: true, depthWrite: false, toneMapped: false, side: THREE.BackSide,
     }));
-    shell.scale.set(1 + 2 * spread / dimensions.x, 1 + 2 * spread / dimensions.y, 1 + 2 * spread / dimensions.z);
+    shell.scale.set(
+      1 + 2 * spread / Math.max(.01, Math.abs(worldSize.x)),
+      1 + 2 * spread / Math.max(.01, Math.abs(worldSize.y)),
+      1 + 2 * spread / Math.max(.01, Math.abs(worldSize.z)),
+    );
+    shell.position.copy(center).multiply(shell.scale).negate();
+    shell.raycast = () => {};
     shell.material.opacity = opacity;
     shell.userData.peakOpacity = opacity;
     glow.add(shell);
   }
-  glow.position.y = height;
+  glow.position.copy(center);
+  glow.position.y += height;
   return glow;
+}
+
+function setSilhouetteGlow(glow, visible, strength) {
+  glow.visible = visible;
+  if (!visible) return;
+  for (const shell of glow.children) shell.material.opacity = shell.userData.peakOpacity * strength;
 }
 
 function circularLine(radius, color) {
@@ -159,10 +174,18 @@ export class FireEscapeEffects {
     this.root = new THREE.Group();
     scene.add(this.root);
     this.door = door;
-    const {min, max} = door.config;
-    this.doorOutline = frameGlow(max[2] - min[2], max[1] - min[1]);
-    this.doorOutline.position.set(min[0] - .13, (min[1] + max[1]) / 2, (min[2] + max[2]) / 2);
-    this.doorOutline.rotation.y = Math.PI / 2;
+    const {max} = door.config;
+    const doorPanels = [];
+    for (const {pivot} of door.leaves) {
+      pivot.traverse(mesh => {
+        if (mesh.isMesh && [mesh.material].flat().every(material => !material.transparent)) doorPanels.push(mesh);
+      });
+    }
+    this.doorGlows = doorPanels.map(panel => {
+      const glow = silhouetteGlow(panel.geometry, 0, panel.getWorldScale(new THREE.Vector3()));
+      panel.add(glow);
+      return glow;
+    });
     this.windowOutline = frameGlow(2.63, .96);
     this.windowOutline.position.set(38.48, 7.54, -7.47);
     this.windowOutline.rotation.y = Math.PI / 2;
@@ -230,7 +253,7 @@ export class FireEscapeEffects {
       this.root.add(flame);
       return flame;
     });
-    this.root.add(this.doorOutline, this.windowOutline, this.belongings, this.alarm);
+    this.root.add(this.windowOutline, this.belongings, this.alarm);
     this.reset();
   }
 
@@ -252,7 +275,7 @@ export class FireEscapeEffects {
     for (const flame of this.flames) flame.visible = false;
     this.rings.forEach(ring => { ring.visible = false; });
     for (const cloud of [...this.sourceRoom, ...this.sourceDoor, ...this.corridor, ...this.room, ...this.seam]) cloud.visible = false;
-    this.doorOutline.visible = false;
+    for (const glow of this.doorGlows) glow.visible = false;
     this.windowOutline.visible = false;
     for (const {outline} of this.belongingOutlines) outline.visible = false;
     this.alarm.visible = false;
@@ -263,13 +286,12 @@ export class FireEscapeEffects {
     const time = story.elapsed;
     const alarmTime = story.smokeSeconds;
     const shimmer = .78 + .18 * Math.sin(story.elapsed * 3);
-    this.doorOutline.visible = story.alarm && story.step <= 3 && this.door.progress < .8;
+    const doorGlowVisible = story.alarm && story.step <= 3 && this.door.progress < .8;
+    for (const glow of this.doorGlows) setSilhouetteGlow(glow, doorGlowVisible, shimmer);
     this.windowOutline.visible = story.step === 3;
-    this.doorOutline.material.uniforms.strength.value = shimmer;
     this.windowOutline.material.uniforms.strength.value = shimmer;
     for (const {outline} of this.belongingOutlines) {
-      outline.visible = story.canSelectBelongings;
-      for (const shell of outline.children) shell.material.opacity = shell.userData.peakOpacity * shimmer;
+      setSilhouetteGlow(outline, story.canSelectBelongings, shimmer);
     }
     const ringing = story.alarm && alarmTime < 9;
     this.alarm.visible = ringing;
