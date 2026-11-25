@@ -6,19 +6,97 @@ const REST = new THREE.Vector3(.54, -.64, -.67);
 const SLEEVE_EXTENSION = .132;
 const WRIST = new THREE.Vector3(-.035, -.15, -.46);
 
+// Diagonal folds gather at different points around the arm, leaving calmer cloth between them.
+const FOLDS = [
+  [.12, .012, .044, .9, .05],
+  [.24, .020, .042, 2.6, .075],
+  [.38, .016, .032, 3.9, .064],
+  [.52, .010, .038, 5.2, .060],
+  [.70, .011, .026, 2.1, .045],
+  [.82, .012, .021, 4.4, .048],
+  [.91, .009, .017, .5, .024],
+];
+
+function makeClothGeometry(length) {
+  const geometry = new THREE.CylinderGeometry(1, 1, length, 64, 84);
+  const position = geometry.attributes.position;
+
+  for (let i = 0; i < position.count; i++) {
+    const t = position.getY(i) / length + .5;
+    const x = position.getX(i);
+    const z = position.getZ(i);
+    const angle = Math.atan2(z, x);
+    const taper = THREE.MathUtils.lerp(.092, .065, t);
+    const envelope = THREE.MathUtils.smoothstep(t, 0, .08)
+      * (1 - THREE.MathUtils.smoothstep(t, .93, 1));
+    let radius = taper + envelope * (.006 * Math.cos(2 * angle + t * 4)
+      + .003 * Math.sin(5 * angle - t * 12));
+    for (const [center, height, width, direction, slant] of FOLDS) {
+      const around = Math.cos(angle - direction);
+      const distance = (t - center - slant * Math.sin(angle - direction)) / width;
+      const ridge = Math.exp(-(distance ** 2));
+      const trough = Math.exp(-((distance - .95) ** 2) / .4);
+      radius += height * envelope * (.38 + .62 * Math.max(0, around)) * (ridge - .48 * trough);
+    }
+
+    const drape = .030 * Math.sin(Math.PI * t);
+    position.setXYZ(i, x * radius, position.getY(i), z * radius - drape);
+  }
+  geometry.computeVertexNormals();
+  return geometry;
+}
+
+function makeCuffGeometry() {
+  const geometry = new THREE.CylinderGeometry(.064, .068, .046, 144, 6);
+  const position = geometry.attributes.position;
+  for (let i = 0; i < position.count; i++) {
+    const x = position.getX(i);
+    const z = position.getZ(i);
+    const ribs = 1 + .026 * Math.cos(Math.atan2(z, x) * 36);
+    position.setX(i, x * ribs);
+    position.setZ(i, z * ribs);
+  }
+  geometry.computeVertexNormals();
+  return geometry;
+}
+
+function makeFabricGrain() {
+  const size = 128;
+  const canvas = document.createElement('canvas');
+  canvas.width = canvas.height = size;
+  const context = canvas.getContext('2d');
+  const pixels = context.createImageData(size, size);
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      const stitch = Math.sin(x * Math.PI / 4) * Math.cos((y + x / 2) * Math.PI / 4);
+      const fleck = ((x * 37 ^ y * 71 ^ x * y * 13) & 31) - 15;
+      const shade = 128 + 23 * stitch + fleck;
+      pixels.data.set([shade, shade, shade, 255], (y * size + x) * 4);
+    }
+  }
+  context.putImageData(pixels, 0, 0);
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(5, 6);
+  return texture;
+}
+
 export class FireEscapeSleeve {
   constructor() {
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera();
     this.arm = new THREE.Group();
-    this.scene.add(this.arm, new THREE.HemisphereLight(0xfff4e4, 0x73839a, 2.25));
+    this.scene.add(this.arm, new THREE.HemisphereLight(0xfff4e4, 0x73839a, 1.55));
     const light = new THREE.DirectionalLight(0xfff6ed, 1.4);
     light.position.set(-.5, 1, 1);
     this.scene.add(light);
 
-    const fabric = new THREE.MeshStandardMaterial({color: 0x58677f, roughness: .94});
-    const cuff = new THREE.MeshStandardMaterial({color: 0x3b475d, roughness: .87});
-    const stitching = new THREE.MeshStandardMaterial({color: 0x70809a, roughness: .92});
+    const grain = makeFabricGrain();
+    const fabric = new THREE.MeshStandardMaterial({
+      color: 0x454b52, roughness: .97, bumpMap: grain, bumpScale: .006,
+    });
+    const cuff = new THREE.MeshStandardMaterial({color: 0x30353c, roughness: .97});
+    const stitching = new THREE.MeshStandardMaterial({color: 0x424951, roughness: .98});
     const skin = new THREE.MeshStandardMaterial({color: 0xb47d60, roughness: .83});
     const axis = WRIST.clone().sub(RAISED);
     const length = axis.length();
@@ -29,15 +107,15 @@ export class FireEscapeSleeve {
       .multiply(this.raisedRotation);
 
     this.sleeveLength = length;
-    this.sleeve = new THREE.Mesh(new THREE.CylinderGeometry(.063, .087, length, 24, 5), fabric);
+    this.sleeve = new THREE.Mesh(makeClothGeometry(length), fabric);
     this.arm.add(this.sleeve);
     this.cuff = new THREE.Group();
     this.arm.add(this.cuff);
-    const ribbedCuff = new THREE.Mesh(new THREE.CylinderGeometry(.059, .065, .055, 24), cuff);
+    const ribbedCuff = new THREE.Mesh(makeCuffGeometry(), cuff);
     ribbedCuff.position.y = -.016;
     this.cuff.add(ribbedCuff);
-    for (const offset of [-.014, .01]) {
-      const seam = new THREE.Mesh(new THREE.TorusGeometry(.061, .002, 6, 24), stitching);
+    for (const offset of [-.016, .006]) {
+      const seam = new THREE.Mesh(new THREE.TorusGeometry(.065, .0013, 6, 64), stitching);
       seam.rotation.x = Math.PI / 2;
       seam.position.y = offset;
       this.cuff.add(seam);
