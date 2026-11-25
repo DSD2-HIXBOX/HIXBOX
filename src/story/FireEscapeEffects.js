@@ -11,25 +11,64 @@ export function smokeDensity(elapsed) {
     + .48 * THREE.MathUtils.smoothstep(elapsed, 8, 75);
 }
 
-function rectangle(width, height, color) {
-  const frame = new THREE.Shape();
-  const hole = new THREE.Path();
-  const inset = .014;
-  frame.moveTo(-width / 2, -height / 2);
-  frame.lineTo(width / 2, -height / 2);
-  frame.lineTo(width / 2, height / 2);
-  frame.lineTo(-width / 2, height / 2);
-  frame.closePath();
-  hole.moveTo(-width / 2 + inset, -height / 2 + inset);
-  hole.lineTo(-width / 2 + inset, height / 2 - inset);
-  hole.lineTo(width / 2 - inset, height / 2 - inset);
-  hole.lineTo(width / 2 - inset, -height / 2 + inset);
-  hole.closePath();
-  frame.holes.push(hole);
-  return new THREE.Mesh(
-    new THREE.ShapeGeometry(frame),
-    new THREE.MeshBasicMaterial({color, transparent: true, depthWrite: false, toneMapped: false, side: THREE.DoubleSide}),
-  );
+function frameGlow(width, height) {
+  const padding = .13;
+  const size = new THREE.Vector2(width + 2 * padding, height + 2 * padding);
+  const material = new THREE.ShaderMaterial({
+    uniforms: {
+      size: {value: size},
+      halfFrame: {value: new THREE.Vector2(width / 2, height / 2)},
+      strength: {value: 0},
+    },
+    transparent: true, depthWrite: false, toneMapped: false, side: THREE.DoubleSide,
+    vertexShader: `
+      varying vec2 glowUV;
+      void main() {
+        glowUV = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      varying vec2 glowUV;
+      uniform vec2 size;
+      uniform vec2 halfFrame;
+      uniform float strength;
+      void main() {
+        vec2 edge = abs((glowUV - 0.5) * size) - halfFrame + 0.015;
+        float distanceToEdge = abs(length(max(edge, 0.0)) + min(max(edge.x, edge.y), 0.0) - 0.015);
+        float glow = exp(-distanceToEdge * 29.0) * 0.48;
+        float core = 0.26 * (1.0 - smoothstep(0.0, 0.012, distanceToEdge));
+        float alpha = (glow + core) * (1.0 - smoothstep(0.085, 0.13, distanceToEdge));
+        vec3 blue = vec3(0.35, 0.64, 1.0);
+        vec3 color = mix(blue, vec3(0.87, 0.94, 1.0), core * 2.4);
+        gl_FragColor = vec4(color, alpha * strength);
+      }
+    `,
+  });
+  return new THREE.Mesh(new THREE.PlaneGeometry(size.x, size.y), material);
+}
+
+function silhouetteGlow(geometry, height) {
+  geometry.computeBoundingBox();
+  const dimensions = geometry.boundingBox.getSize(new THREE.Vector3());
+  const glow = new THREE.Group();
+  for (const [spread, opacity, color] of [
+    [.024, .045, 0x639bff],
+    [.017, .085, 0x74aaff],
+    [.011, .14, 0x8fbaff],
+    [.006, .21, 0xb6d5ff],
+    [.003, .27, 0xe0efff],
+  ]) {
+    const shell = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({
+      color, transparent: true, depthWrite: false, toneMapped: false, side: THREE.BackSide,
+    }));
+    shell.scale.set(1 + 2 * spread / dimensions.x, 1 + 2 * spread / dimensions.y, 1 + 2 * spread / dimensions.z);
+    shell.material.opacity = opacity;
+    shell.userData.peakOpacity = opacity;
+    glow.add(shell);
+  }
+  glow.position.y = height;
+  return glow;
 }
 
 function circularLine(radius, color) {
@@ -40,14 +79,6 @@ function circularLine(radius, color) {
   return new THREE.LineLoop(
     new THREE.BufferGeometry().setFromPoints(points),
     new THREE.LineBasicMaterial({color, transparent: true, depthWrite: false}),
-  );
-}
-
-function glint() {
-  const points = [[-.075, 0], [.075, 0], [0, -.075], [0, .075]].map(([x, y]) => new THREE.Vector3(x, y, 0));
-  return new THREE.LineSegments(
-    new THREE.BufferGeometry().setFromPoints(points),
-    new THREE.LineBasicMaterial({color: 0xe2efff, transparent: true, depthWrite: false}),
   );
 }
 
@@ -129,10 +160,10 @@ export class FireEscapeEffects {
     scene.add(this.root);
     this.door = door;
     const {min, max} = door.config;
-    this.doorOutline = rectangle(max[2] - min[2], max[1] - min[1], 0xaecfff);
+    this.doorOutline = frameGlow(max[2] - min[2], max[1] - min[1]);
     this.doorOutline.position.set(min[0] - .13, (min[1] + max[1]) / 2, (min[2] + max[2]) / 2);
     this.doorOutline.rotation.y = Math.PI / 2;
-    this.windowOutline = rectangle(2.63, .96, 0xbfdaff);
+    this.windowOutline = frameGlow(2.63, .96);
     this.windowOutline.position.set(38.48, 7.54, -7.47);
     this.windowOutline.rotation.y = Math.PI / 2;
 
@@ -164,27 +195,14 @@ export class FireEscapeEffects {
     boxPiece(bag, [.082, .026, .027], [0, .052, -.109], 0x4b324e);
 
     this.belongingOutlines = [
-      {object: book, outline: rectangle(.246, .207, 0xd6eaff), height: .045},
-      {object: bag, outline: rectangle(.264, .255, 0xd6eaff), height: .13},
+      {object: book, outline: silhouetteGlow(new RoundedBoxGeometry(.232, .038, .19, 2, .003), .019)},
+      {object: bag, outline: silhouetteGlow(shell.geometry, shell.position.y)},
     ];
     this.belongingTargets = this.belongingOutlines.flatMap(({object}) => [...object.children]);
-    for (const {object, outline, height} of this.belongingOutlines) {
-      outline.position.y = height;
-      outline.rotation.x = -Math.PI / 2;
+    for (const {object, outline} of this.belongingOutlines) {
       object.add(outline);
       this.belongings.add(object);
     }
-
-    this.markers = [
-      {outline: this.doorOutline, offset: new THREE.Vector3(.37, .67, .025)},
-      {outline: this.windowOutline, offset: new THREE.Vector3(.76, .31, .025)},
-      ...this.belongingOutlines.map(({outline}) => ({outline, offset: new THREE.Vector3(.08, .07, .02)})),
-    ].map(({outline, offset}) => {
-      const sparkle = glint();
-      outline.add(sparkle);
-      sparkle.position.copy(offset);
-      return {outline, sparkle};
-    });
 
     this.alarm = new THREE.Group();
     this.alarm.position.set(38.47, 8.24, -9.55);
@@ -234,7 +252,9 @@ export class FireEscapeEffects {
     for (const flame of this.flames) flame.visible = false;
     this.rings.forEach(ring => { ring.visible = false; });
     for (const cloud of [...this.sourceRoom, ...this.sourceDoor, ...this.corridor, ...this.room, ...this.seam]) cloud.visible = false;
-    for (const {outline} of this.markers) outline.visible = false;
+    this.doorOutline.visible = false;
+    this.windowOutline.visible = false;
+    for (const {outline} of this.belongingOutlines) outline.visible = false;
     this.alarm.visible = false;
     this.lens.material.emissive.setHex(0);
   }
@@ -244,14 +264,13 @@ export class FireEscapeEffects {
     const alarmTime = story.smokeSeconds;
     const shimmer = .78 + .18 * Math.sin(story.elapsed * 3);
     this.doorOutline.visible = story.alarm && story.step <= 3 && this.door.progress < .8;
-    for (const {outline} of this.belongingOutlines) outline.visible = story.canSelectBelongings;
     this.windowOutline.visible = story.step === 3;
-    this.markers.forEach(({outline, sparkle}, index) => {
-      const pulse = Math.max(0, Math.sin(story.elapsed * 2.7 + index * 2)) ** 3;
-      outline.material.opacity = shimmer;
-      sparkle.material.opacity = pulse * .76;
-      sparkle.scale.setScalar(.48 + pulse * .52);
-    });
+    this.doorOutline.material.uniforms.strength.value = shimmer;
+    this.windowOutline.material.uniforms.strength.value = shimmer;
+    for (const {outline} of this.belongingOutlines) {
+      outline.visible = story.canSelectBelongings;
+      for (const shell of outline.children) shell.material.opacity = shell.userData.peakOpacity * shimmer;
+    }
     const ringing = story.alarm && alarmTime < 9;
     this.alarm.visible = ringing;
     this.lens.material.emissive.setHex(ringing ? 0xff3c39 : 0);
