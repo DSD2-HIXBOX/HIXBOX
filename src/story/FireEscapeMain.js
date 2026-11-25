@@ -21,7 +21,7 @@ async function main() {
   const audio = new FireEscapeAudio();
   const [world] = await Promise.all([loadFireEscapeWorld(canvas, setStatus), audio.preload()]);
   const {renderer, scene, camera, rig, collision, classroomDoor} = world;
-  furnishFireClassroom(scene, collision, world.spawn.y);
+  furnishFireClassroom(scene, world.interactionWorld.root, collision, world.spawn.y);
   const story = new FireEscapeStory();
   const effects = new FireEscapeEffects(scene, classroomDoor);
   const ui = new FireEscapeUI();
