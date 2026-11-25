@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
 
+const SHOULDER = new THREE.Vector3(.22, -.30, -.12);
+const ARM_AXIS = new THREE.Vector3(0, 1, 0);
 const RAISED = new THREE.Vector3(.38, -.25, -.62);
 const REST = new THREE.Vector3(.54, -.64, -.67);
 const SLEEVE_EXTENSION = .132;
@@ -17,7 +19,7 @@ const FOLDS = [
   [.91, .009, .017, .5, .024],
 ];
 
-function makeClothGeometry(length) {
+function makeClothGeometry(length, shoulderRadius = .092, endRadius = .065) {
   const geometry = new THREE.CylinderGeometry(1, 1, length, 64, 84);
   const position = geometry.attributes.position;
 
@@ -26,7 +28,7 @@ function makeClothGeometry(length) {
     const x = position.getX(i);
     const z = position.getZ(i);
     const angle = Math.atan2(z, x);
-    const taper = THREE.MathUtils.lerp(.092, .065, t);
+    const taper = THREE.MathUtils.lerp(shoulderRadius, endRadius, t);
     const envelope = THREE.MathUtils.smoothstep(t, 0, .08)
       * (1 - THREE.MathUtils.smoothstep(t, .93, 1));
     let radius = taper + envelope * (.006 * Math.cos(2 * angle + t * 4)
@@ -95,12 +97,18 @@ export class FireEscapeSleeve {
     const fabric = new THREE.MeshStandardMaterial({
       color: 0x454b52, roughness: .97, bumpMap: grain, bumpScale: .006,
     });
+    this.upperSleeve = new THREE.Mesh(makeClothGeometry(1, .111, .078), fabric);
+    this.arm.add(this.upperSleeve);
+    this.shoulderInArm = new THREE.Vector3();
+    this.upperSleeveAxis = new THREE.Vector3();
+    this.inverseArmRotation = new THREE.Quaternion();
+
     const cuff = new THREE.MeshStandardMaterial({color: 0x30353c, roughness: .97});
     const stitching = new THREE.MeshStandardMaterial({color: 0x424951, roughness: .98});
     const skin = new THREE.MeshStandardMaterial({color: 0xb47d60, roughness: .83});
     const axis = WRIST.clone().sub(RAISED);
     const length = axis.length();
-    this.arm.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), axis.normalize());
+    this.arm.quaternion.setFromUnitVectors(ARM_AXIS, axis.normalize());
     this.raisedRotation = this.arm.quaternion.clone();
     this.restRotation = new THREE.Quaternion()
       .setFromAxisAngle(new THREE.Vector3(0, 0, 1), -.32)
@@ -169,6 +177,14 @@ export class FireEscapeSleeve {
     this.arm.position.lerpVectors(REST, RAISED, rise);
     this.arm.position.y += Math.sin(time * 3.2) * .0028 * rise;
     this.arm.quaternion.slerpQuaternions(this.restRotation, this.raisedRotation, rise);
+
+    // Anchor the upper sleeve at the shoulder and tuck its end inside the forearm.
+    this.inverseArmRotation.copy(this.arm.quaternion).invert();
+    this.shoulderInArm.copy(SHOULDER).sub(this.arm.position).applyQuaternion(this.inverseArmRotation);
+    this.upperSleeveAxis.set(0, .075, 0).sub(this.shoulderInArm);
+    this.upperSleeve.position.copy(this.shoulderInArm).addScaledVector(this.upperSleeveAxis, .5);
+    this.upperSleeve.scale.y = this.upperSleeveAxis.length();
+    this.upperSleeve.quaternion.setFromUnitVectors(ARM_AXIS, this.upperSleeveAxis.normalize());
   }
 
   render(renderer, view) {
