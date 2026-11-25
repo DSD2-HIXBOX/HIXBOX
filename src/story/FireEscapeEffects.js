@@ -143,18 +143,33 @@ function flameMaterial(seed) {
       uniform float time;
       uniform float seed;
       uniform float reveal;
+      float hash(vec2 p) {
+        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+      }
+      float noise(vec2 p) {
+        vec2 i = floor(p);
+        vec2 f = fract(p);
+        vec2 w = f * f * (3.0 - 2.0 * f);
+        return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), w.x),
+          mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), w.x), w.y);
+      }
       void main() {
         float y = flameUV.y;
-        float sway = sin(y * 8.0 - time * 5.0 + seed) * 0.13 * y;
-        float x = abs(flameUV.x - 0.5 + sway);
-        float width = 0.46 * pow(1.0 - y, 0.7);
-        float edge = 1.0 - smoothstep(width * 0.28, width + 0.02, x);
-        float tail = 1.0 - smoothstep(0.53, 0.94, y + 0.08 * sin(time * 4.0 + seed));
-        float opacity = edge * tail * smoothstep(0.0, 0.14, y) * reveal;
-        vec3 orange = vec3(1.0, 0.28, 0.035);
-        vec3 yellow = vec3(1.0, 0.86, 0.36);
-        vec3 color = mix(orange, yellow, edge * (1.0 - y));
-        gl_FragColor = vec4(color, opacity * 0.92);
+        vec2 stream = vec2(flameUV.x * 3.9 + seed, y * 5.7 - time * 4.2);
+        float turbulence = noise(stream) * 0.58 + noise(stream * 2.15) * 0.29
+          + noise(stream * 4.38) * 0.13;
+        float twist = (noise(vec2(y * 4.7 - time * 3.1, seed + 7.0)) - 0.5) * 0.39 * y;
+        float x = abs(flameUV.x - 0.5 + twist);
+        float width = mix(0.42, 0.035, y) * (0.61 + turbulence * 0.66);
+        float tip = y + (turbulence - 0.44) * 0.33;
+        float body = 1.0 - smoothstep(width * 0.55, width + 0.027, x);
+        float breakup = smoothstep(y * 0.43 - 0.09, y * 0.45 + 0.17, turbulence);
+        float opacity = body * breakup * (1.0 - smoothstep(0.68, 0.98, tip))
+          * smoothstep(0.015, 0.11, y);
+        float heat = clamp((1.0 - y) * 0.54 + turbulence * 0.55 - x * 0.75, 0.0, 1.0);
+        vec3 color = mix(vec3(0.85, 0.13, 0.022), vec3(1.0, 0.53, 0.06), smoothstep(0.25, 0.64, heat));
+        color = mix(color, vec3(1.0, 0.91, 0.64), smoothstep(0.58, 0.90, heat) * body);
+        gl_FragColor = vec4(color, opacity * reveal * 0.96);
       }
     `,
   });
@@ -239,7 +254,7 @@ export class FireEscapeEffects {
     this.geometry = new THREE.PlaneGeometry(1, 1);
     // The neighboring classroom occupies the west side of the wall (x < 38.62).
     // Its existing door frame spans z=-14.75 to -13.40 in the school model.
-    this.fireOrigin = new THREE.Vector3(38.03, 5.75, -12.92);
+    this.fireOrigin = new THREE.Vector3(37.39, 6.50, -12.92);
     this.sourceDoorZ = -14.08;
     this.smokeSight = new THREE.Vector3(39.45, 7.56, -12.7);
     this.sourceRoom = this.addSmoke(12, bounds(35.5, 38.63, 6.58, 8.6, -14.96, -10.7), 0x545257);
@@ -248,7 +263,10 @@ export class FireEscapeEffects {
     this.room = this.addSmoke(12, bounds(34.4, 38.70, 7.58, 8.52, -10.05, -4.75), 0x888487);
     const openingZ = door.openingCenter.z;
     this.seam = this.addSmoke(4, bounds(38.45, 39.1, max[1] - .15, max[1] + .09, openingZ - .28, openingZ + .28), 0x888487);
-    this.flames = Array.from({length: 3}, (_, index) => {
+    this.fireLight = new THREE.PointLight(0xffa44c, 0, 2.55, 2);
+    this.fireLight.position.copy(this.fireOrigin).add(new THREE.Vector3(0, .55, 0));
+    this.root.add(this.fireLight);
+    this.flames = Array.from({length: 7}, (_, index) => {
       const flame = new THREE.Mesh(this.geometry, flameMaterial(index * 2.3));
       this.root.add(flame);
       return flame;
@@ -273,6 +291,7 @@ export class FireEscapeEffects {
   reset() {
     this.indoorTime = 0;
     for (const flame of this.flames) flame.visible = false;
+    this.fireLight.intensity = 0;
     this.rings.forEach(ring => { ring.visible = false; });
     for (const cloud of [...this.sourceRoom, ...this.sourceDoor, ...this.corridor, ...this.room, ...this.seam]) cloud.visible = false;
     for (const glow of this.doorGlows) glow.visible = false;
@@ -333,18 +352,21 @@ export class FireEscapeEffects {
 
     const doorOpening = this.door.progress;
     if (story.step === 4 || doorOpening > .15) this.indoorTime += dt;
+    const fireReveal = story.alarm ? THREE.MathUtils.smoothstep(doorOpening, .28, .85) : 0;
+    const flicker = 1.4 + Math.sin(time * 7.7) * .25 + Math.sin(time * 12.3 + 1.5) * .14;
+    this.fireLight.intensity = fireReveal * flicker;
     this.flames.forEach((flame, index) => {
-      flame.visible = story.alarm && doorOpening > .28;
+      flame.visible = fireReveal > 0;
       if (!flame.visible) return;
-      const height = 1.52 + index * .19;
+      const height = .75 + ((index * 3) % 7) * .132 + .12 * Math.sin(time * 4.4 + index * 2.5);
       flame.position.copy(this.fireOrigin);
-      flame.position.x += (index - 1) * .19;
+      flame.position.x += (index % 3 - 1) * .135;
       flame.position.y += height * .53;
-      flame.position.z += (index - 1) * .32;
-      flame.scale.set(.68 + index * .06, height, 1);
+      flame.position.z += (index - 3) * .145;
+      flame.scale.set(.34 + (index % 3) * .09, height, 1);
       flame.quaternion.copy(camera.quaternion);
       flame.material.uniforms.time.value = time;
-      flame.material.uniforms.reveal.value = THREE.MathUtils.smoothstep(doorOpening, .28, .85);
+      flame.material.uniforms.reveal.value = fireReveal;
     });
     this.seam.forEach(cloud => {
       const seed = cloud.userData.seed;

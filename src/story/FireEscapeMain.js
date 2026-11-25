@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import {PCInput} from '../input/PCInput.js';
 import {ExploreInteraction} from '../explore/ExploreInteraction.js';
 import {SmoothEye} from '../explore/SmoothEye.js';
+import {furnishFireClassroom} from './FireEscapeClassroom.js';
 import {FireEscapeAudio} from './FireEscapeAudio.js';
 import {FireEscapeEffects, WINDOW} from './FireEscapeEffects.js';
 import {FireEscapeStory} from './FireEscapeStory.js';
@@ -20,6 +21,7 @@ async function main() {
   const audio = new FireEscapeAudio();
   const [world] = await Promise.all([loadFireEscapeWorld(canvas, setStatus), audio.preload()]);
   const {renderer, scene, camera, rig, collision, classroomDoor} = world;
+  furnishFireClassroom(scene, collision, world.spawn.y);
   const story = new FireEscapeStory();
   const effects = new FireEscapeEffects(scene, classroomDoor);
   const ui = new FireEscapeUI();
