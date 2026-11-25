@@ -48,7 +48,7 @@ function frameGlow(width, height) {
   return new THREE.Mesh(new THREE.PlaneGeometry(size.x, size.y), material);
 }
 
-function silhouetteGlow(geometry, height = 0, worldScale = new THREE.Vector3(1, 1, 1)) {
+function silhouetteGlow(geometry, height = 0, worldScale = new THREE.Vector3(1, 1, 1), boost = 1) {
   geometry.computeBoundingBox();
   const dimensions = geometry.boundingBox.getSize(new THREE.Vector3());
   const center = geometry.boundingBox.getCenter(new THREE.Vector3());
@@ -65,14 +65,14 @@ function silhouetteGlow(geometry, height = 0, worldScale = new THREE.Vector3(1, 
       color, transparent: true, depthWrite: false, toneMapped: false, side: THREE.BackSide,
     }));
     shell.scale.set(
-      1 + 2 * spread / Math.max(.01, Math.abs(worldSize.x)),
-      1 + 2 * spread / Math.max(.01, Math.abs(worldSize.y)),
-      1 + 2 * spread / Math.max(.01, Math.abs(worldSize.z)),
+      1 + 2 * spread * boost / Math.max(.01, Math.abs(worldSize.x)),
+      1 + 2 * spread * boost / Math.max(.01, Math.abs(worldSize.y)),
+      1 + 2 * spread * boost / Math.max(.01, Math.abs(worldSize.z)),
     );
     shell.position.copy(center).multiply(shell.scale).negate();
     shell.raycast = () => {};
-    shell.material.opacity = opacity;
-    shell.userData.peakOpacity = opacity;
+    shell.userData.peakOpacity = opacity * boost;
+    shell.material.opacity = shell.userData.peakOpacity;
     glow.add(shell);
   }
   glow.position.copy(center);
@@ -182,7 +182,7 @@ export class FireEscapeEffects {
       });
     }
     this.doorGlows = doorPanels.map(panel => {
-      const glow = silhouetteGlow(panel.geometry, 0, panel.getWorldScale(new THREE.Vector3()));
+      const glow = silhouetteGlow(panel.geometry, 0, panel.getWorldScale(new THREE.Vector3()), 2.1);
       panel.add(glow);
       return glow;
     });
