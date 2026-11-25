@@ -1,9 +1,10 @@
 import * as THREE from 'three';
 import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
 
-const RAISED = new THREE.Vector3(.38, -.30, -.62);
+const RAISED = new THREE.Vector3(.38, -.25, -.62);
 const REST = new THREE.Vector3(.54, -.64, -.67);
-const WRIST = new THREE.Vector3(-.035, -.20, -.46);
+const SLEEVE_EXTENSION = .132;
+const WRIST = new THREE.Vector3(-.035, -.15, -.46);
 
 export class FireEscapeSleeve {
   constructor() {
@@ -27,17 +28,19 @@ export class FireEscapeSleeve {
       .setFromAxisAngle(new THREE.Vector3(0, 0, 1), -.32)
       .multiply(this.raisedRotation);
 
-    const sleeve = new THREE.Mesh(new THREE.CylinderGeometry(.063, .087, length, 24, 5), fabric);
-    sleeve.position.y = length / 2;
-    this.arm.add(sleeve);
+    this.sleeveLength = length;
+    this.sleeve = new THREE.Mesh(new THREE.CylinderGeometry(.063, .087, length, 24, 5), fabric);
+    this.arm.add(this.sleeve);
+    this.cuff = new THREE.Group();
+    this.arm.add(this.cuff);
     const ribbedCuff = new THREE.Mesh(new THREE.CylinderGeometry(.059, .065, .055, 24), cuff);
-    ribbedCuff.position.y = length - .016;
-    this.arm.add(ribbedCuff);
+    ribbedCuff.position.y = -.016;
+    this.cuff.add(ribbedCuff);
     for (const offset of [-.014, .01]) {
       const seam = new THREE.Mesh(new THREE.TorusGeometry(.061, .002, 6, 24), stitching);
       seam.rotation.x = Math.PI / 2;
-      seam.position.y = length + offset;
-      this.arm.add(seam);
+      seam.position.y = offset;
+      this.cuff.add(seam);
     }
 
     const hand = new THREE.Group();
@@ -73,10 +76,18 @@ export class FireEscapeSleeve {
   }
 
   update(elapsed, time) {
-    this.progress = THREE.MathUtils.clamp(this.progress + elapsed * (this.covering ? 2.9 : -3.5), 0, 1);
+    this.progress = THREE.MathUtils.clamp(this.progress + elapsed * (this.covering ? 1.65 : -2.6), 0, 1);
     this.arm.visible = this.progress > 0;
     if (!this.arm.visible) return;
-    const rise = THREE.MathUtils.smootherstep(this.progress, 0, 1);
+    const pull = THREE.MathUtils.smootherstep(this.progress, 0, .42);
+    const lift = THREE.MathUtils.smootherstep(this.progress, .42, 1);
+    const extension = SLEEVE_EXTENSION * pull;
+    const length = this.sleeveLength + extension;
+    this.sleeve.scale.y = length / this.sleeveLength;
+    this.sleeve.position.y = length / 2;
+    this.cuff.position.y = length;
+
+    const rise = .35 * pull + .65 * lift;
     this.arm.position.lerpVectors(REST, RAISED, rise);
     this.arm.position.y += Math.sin(time * 3.2) * .0028 * rise;
     this.arm.quaternion.slerpQuaternions(this.restRotation, this.raisedRotation, rise);
