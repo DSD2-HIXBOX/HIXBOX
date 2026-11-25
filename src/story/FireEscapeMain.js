@@ -5,6 +5,7 @@ import {SmoothEye} from '../explore/SmoothEye.js';
 import {furnishFireClassroom} from './FireEscapeClassroom.js';
 import {FireEscapeAudio} from './FireEscapeAudio.js';
 import {FireEscapeEffects, WINDOW} from './FireEscapeEffects.js';
+import {FireEscapeSleeve} from './FireEscapeSleeve.js';
 import {FireEscapeStory} from './FireEscapeStory.js';
 import {FireEscapeUI} from './FireEscapeUI.js';
 import {loadFireEscapeWorld} from './FireEscapeWorld.js';
@@ -23,6 +24,7 @@ async function main() {
   const {renderer, scene, camera, rig, collision, classroomDoor} = world;
   furnishFireClassroom(scene, world.interactionWorld.root, collision, world.spawn.y);
   const story = new FireEscapeStory();
+  const sleeve = new FireEscapeSleeve();
   const effects = new FireEscapeEffects(scene, classroomDoor);
   const ui = new FireEscapeUI();
   const smoothEye = new SmoothEye(STANDING_EYE);
@@ -68,13 +70,17 @@ async function main() {
   }
 
   const pc = new PCInput(camera, canvas, interaction, showPlaying, posture);
-  pc.onProtection = () => true;
+  pc.onProtection = () => {
+    if (playing && story.alarm) sleeve.toggle();
+    return true;
+  };
 
   function reset() {
     story.reset();
     audio.stop();
     ui.reset();
     effects.reset();
+    sleeve.reset();
     world.doors.reset();
     rig.position.copy(world.spawn);
     collision.height = 1.7;
@@ -203,10 +209,12 @@ async function main() {
       });
       if (!alarmWasOn && story.alarm) audio.playAlarm();
       effects.update(story, camera, elapsed);
+      sleeve.update(Math.min(elapsed, .12), story.elapsed);
       ui.update(story, lookingAtWindow || aimedTarget());
       world.doors.update(dt, rig.position);
     }
     world.render(dt);
+    if (playing) sleeve.render(renderer, camera);
   });
 }
 
