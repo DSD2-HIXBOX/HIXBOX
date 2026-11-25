@@ -4,6 +4,7 @@ import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js'
 const SHOULDER = new THREE.Vector3(.22, -.28, -.20);
 const ARM_AXIS = new THREE.Vector3(0, 1, 0);
 const RAISED = new THREE.Vector3(.38, -.25, -.62);
+const MOUTH_TUCK = new THREE.Vector3(.025, .045, .08);
 const REST = new THREE.Vector3(.54, -.64, -.67);
 const SLEEVE_EXTENSION = .132;
 const WRIST = new THREE.Vector3(-.035, -.15, -.46);
@@ -175,6 +176,8 @@ export class FireEscapeSleeve {
 
     const rise = .35 * pull + .65 * lift;
     this.arm.position.lerpVectors(REST, RAISED, rise);
+    const tuck = THREE.MathUtils.smootherstep(this.progress, .65, 1);
+    this.arm.position.addScaledVector(MOUTH_TUCK, tuck);
     this.arm.quaternion.slerpQuaternions(this.restRotation, this.raisedRotation, rise);
 
     // Anchor the upper sleeve at the shoulder and tuck its end inside the forearm.
