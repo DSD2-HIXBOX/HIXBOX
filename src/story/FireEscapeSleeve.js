@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
 
-const SHOULDER = new THREE.Vector3(.22, -.30, -.12);
+const SHOULDER = new THREE.Vector3(.22, -.28, -.20);
 const ARM_AXIS = new THREE.Vector3(0, 1, 0);
 const RAISED = new THREE.Vector3(.38, -.25, -.62);
 const REST = new THREE.Vector3(.54, -.64, -.67);
@@ -97,6 +97,11 @@ export class FireEscapeSleeve {
     const fabric = new THREE.MeshStandardMaterial({
       color: 0x454b52, roughness: .97, bumpMap: grain, bumpScale: .006,
     });
+    // The upper sleeve starts inside the sweatshirt at the right shoulder.
+    const torso = new THREE.Mesh(new RoundedBoxGeometry(.58, .58, .40, 5, .12), fabric);
+    torso.position.set(0, -.438, -.19);
+    this.scene.add(torso);
+
     this.upperSleeve = new THREE.Mesh(makeClothGeometry(1, .111, .078), fabric);
     this.arm.add(this.upperSleeve);
     this.shoulderInArm = new THREE.Vector3();
@@ -161,7 +166,7 @@ export class FireEscapeSleeve {
     this.covering = !this.covering;
   }
 
-  update(elapsed, time) {
+  update(elapsed) {
     this.progress = THREE.MathUtils.clamp(this.progress + elapsed * (this.covering ? 1.65 : -2.6), 0, 1);
     this.arm.visible = this.progress > 0;
     if (!this.arm.visible) return;
@@ -175,7 +180,6 @@ export class FireEscapeSleeve {
 
     const rise = .35 * pull + .65 * lift;
     this.arm.position.lerpVectors(REST, RAISED, rise);
-    this.arm.position.y += Math.sin(time * 3.2) * .0028 * rise;
     this.arm.quaternion.slerpQuaternions(this.restRotation, this.raisedRotation, rise);
 
     // Anchor the upper sleeve at the shoulder and tuck its end inside the forearm.

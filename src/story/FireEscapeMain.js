@@ -209,7 +209,7 @@ async function main() {
       });
       if (!alarmWasOn && story.alarm) audio.playAlarm();
       effects.update(story, camera, elapsed);
-      sleeve.update(Math.min(elapsed, .12), story.elapsed);
+      sleeve.update(Math.min(elapsed, .12));
       ui.update(story, lookingAtWindow || aimedTarget());
       world.doors.update(dt, rig.position);
     }
