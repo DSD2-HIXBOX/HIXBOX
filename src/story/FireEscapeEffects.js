@@ -351,7 +351,7 @@ export class FireEscapeEffects {
     });
 
     const doorOpening = this.door.progress;
-    const inlet = doorOpening > .15 ? doorOpening : story.step === 4 ? .22 : 0;
+    const inlet = story.alarm ? THREE.MathUtils.lerp(.72, 1, doorOpening) : 0;
     this.indoorTime += dt * inlet * 1.4;
     const fireReveal = story.alarm ? THREE.MathUtils.smoothstep(doorOpening, .28, .85) : 0;
     const flicker = 1.4 + Math.sin(time * 7.7) * .25 + Math.sin(time * 12.3 + 1.5) * .14;
@@ -373,7 +373,7 @@ export class FireEscapeEffects {
       const seed = cloud.userData.seed;
       this.cloud(cloud, camera, 38.79, this.door.config.max[1] - .04,
         this.door.openingCenter.z + seed * .26 - .13, .64, .23,
-        doorOpening * Math.min(this.indoorTime * .12, .52), time);
+        inlet * Math.min(this.indoorTime * .19, .58), time);
     });
     const roomAge = this.indoorTime;
     this.room.forEach((cloud, index) => {
@@ -384,9 +384,9 @@ export class FireEscapeEffects {
       const centerX = 38.13 - column * 1.24;
       const centerZ = -9.15 + row * 2.75;
       const distance = Math.hypot(38.6 - centerX, (this.door.openingCenter.z - centerZ) * .72);
-      const arrival = distance * 2.05 + (lower ? 9 : 0);
-      const fill = THREE.MathUtils.smoothstep(roomAge, arrival, arrival + (lower ? 25 : 18));
-      const opacity = fill * (lower ? .39 : .55) * (.85 + seed * .15);
+      const arrival = Math.max(0, distance - .9) * 1.2 + (lower ? 3 : 0);
+      const fill = THREE.MathUtils.smoothstep(roomAge, arrival, arrival + (lower ? 15 : 9));
+      const opacity = fill * (lower ? .52 : .68) * (.85 + seed * .15);
       const x = centerX + Math.sin(time * .21 + seed * 9) * .33;
       const y = (lower ? 7.30 : 8.04) + Math.sin(time * .2 + seed * 15) * .12;
       const z = centerZ + Math.cos(time * .18 + seed * 12) * .47;
