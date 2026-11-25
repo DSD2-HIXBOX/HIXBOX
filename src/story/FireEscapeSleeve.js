@@ -97,11 +97,6 @@ export class FireEscapeSleeve {
     const fabric = new THREE.MeshStandardMaterial({
       color: 0x454b52, roughness: .97, bumpMap: grain, bumpScale: .006,
     });
-    // The upper sleeve starts inside the sweatshirt at the right shoulder.
-    const torso = new THREE.Mesh(new RoundedBoxGeometry(.58, .58, .40, 5, .12), fabric);
-    torso.position.set(0, -.438, -.19);
-    this.scene.add(torso);
-
     this.upperSleeve = new THREE.Mesh(makeClothGeometry(1, .111, .078), fabric);
     this.arm.add(this.upperSleeve);
     this.shoulderInArm = new THREE.Vector3();
