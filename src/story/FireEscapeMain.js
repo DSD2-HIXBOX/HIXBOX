@@ -25,7 +25,7 @@ async function main() {
   furnishFireClassroom(scene, world.interactionWorld.root, collision, world.spawn.y);
   const story = new FireEscapeStory();
   const sleeve = new FireEscapeSleeve();
-  const effects = new FireEscapeEffects(scene, classroomDoor);
+  const effects = new FireEscapeEffects(scene, classroomDoor, world.interactionWorld.root);
   const ui = new FireEscapeUI();
   const smoothEye = new SmoothEye(STANDING_EYE);
   const doorTargets = world.interactionWorld.targets;
@@ -107,7 +107,7 @@ async function main() {
         setStatus('마우스 잠금을 허용한 뒤 계속하기를 눌러 주세요.');
       } else {
         showPlaying(true);
-        if (story.alarm && story.step === 1) audio.playAlarm();
+        if (story.alarm && story.step === 1) audio.playAlarm(effects.alarm.position);
       }
     });
   }
@@ -199,6 +199,7 @@ async function main() {
       pc.update(dt, rig, collision);
       smoothEye.update(Math.min(elapsed, .15), rig.position.y, camera);
       camera.updateWorldMatrix(true, false);
+      if (audio.alarm || !story.alarm) audio.updateListener(camera);
       const lookingAtWindow = checkWindow() || checkOpenHallway();
       const nearDoor = rig.position.x < classroomDoor.config.min[0] &&
         Math.hypot(rig.position.x - classroomDoor.openingCenter.x, rig.position.z - classroomDoor.openingCenter.z) < 1.8;
@@ -207,7 +208,7 @@ async function main() {
         nearDoor, doorOpened: classroomDoor.open, lookingAtWindow, announcementPlaying: audio.announcing,
         lowReady: collision.height <= LOW_HEIGHT && Math.abs(camera.position.y - LOW_EYE) < .025,
       });
-      if (!alarmWasOn && story.alarm) audio.playAlarm();
+      if (!alarmWasOn && story.alarm) audio.playAlarm(effects.alarm.position);
       effects.update(story, camera, elapsed);
       sleeve.update(Math.min(elapsed, .12));
       ui.update(story, lookingAtWindow || aimedTarget());

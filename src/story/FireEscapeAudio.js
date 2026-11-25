@@ -12,14 +12,35 @@ export class FireEscapeAudio {
     this.decoding.catch(error => console.error('화재 안내 방송을 재생할 수 없습니다.', error));
   }
 
-  playAlarm() {
+  updateListener(camera) {
+    if (!this.context) return;
+    const listener = this.context.listener;
+    const matrix = camera.matrixWorld.elements;
+    listener.positionX.value = matrix[12];
+    listener.positionY.value = matrix[13];
+    listener.positionZ.value = matrix[14];
+    listener.forwardX.value = -matrix[8];
+    listener.forwardY.value = -matrix[9];
+    listener.forwardZ.value = -matrix[10];
+    listener.upX.value = matrix[4];
+    listener.upY.value = matrix[5];
+    listener.upZ.value = matrix[6];
+  }
+
+  playAlarm(position) {
     this.stop();
     const context = this.context;
     if (!context) return;
     const alarm = context.createOscillator();
     const gain = context.createGain();
     const now = context.currentTime;
-    alarm.connect(gain).connect(context.destination);
+    const source = context.createPanner();
+    source.panningModel = 'HRTF';
+    source.refDistance = 4;
+    source.positionX.value = position.x;
+    source.positionY.value = position.y;
+    source.positionZ.value = position.z;
+    alarm.connect(gain).connect(source).connect(context.destination);
     gain.gain.setValueAtTime(0, now);
     for (let pulse = 0; pulse < 9; pulse++) {
       const start = now + pulse * .85;

@@ -185,7 +185,7 @@ const bounds = (x0, x1, y0, y1, z0, z1) => [
 ];
 
 export class FireEscapeEffects {
-  constructor(scene, door) {
+  constructor(scene, door, school) {
     this.root = new THREE.Group();
     scene.add(this.root);
     this.door = door;
@@ -242,13 +242,16 @@ export class FireEscapeEffects {
       this.belongings.add(object);
     }
 
+    // The existing indicator is on the teaching wall, facing into the classroom (+Z).
     this.alarm = new THREE.Group();
-    this.alarm.position.set(38.47, 8.24, -9.55);
-    this.alarm.rotation.y = -Math.PI / 2;
-    boxPiece(this.alarm, [.21, .15, .06], [0, 0, 0], 0x751a23);
-    this.lens = boxPiece(this.alarm, [.15, .065, .035], [0, 0, .047], 0xcf4148);
-    this.rings = [circularLine(.18, 0xff5752), circularLine(.18, 0xff8c76)];
-    this.rings.forEach(ring => { ring.position.z = .077; this.alarm.add(ring); });
+    this.alarm.position.set(38.0234, 8.1238, -10.35);
+    const indicator = school.getObjectByName('node21755');
+    if (indicator?.isMesh) {
+      this.alarmMaterial = indicator.material.clone();
+      indicator.material = this.alarmMaterial;
+    }
+    this.rings = [circularLine(.07, 0xff5752), circularLine(.07, 0xff8c76)];
+    this.alarm.add(...this.rings);
 
     this.texture = smokeTexture();
     this.geometry = new THREE.PlaneGeometry(1, 1);
@@ -288,6 +291,12 @@ export class FireEscapeEffects {
     });
   }
 
+  setAlarmGlow(intensity) {
+    if (!this.alarmMaterial) return;
+    this.alarmMaterial.emissive.setHex(0xff3c39);
+    this.alarmMaterial.emissiveIntensity = intensity;
+  }
+
   reset() {
     this.indoorTime = 0;
     for (const flame of this.flames) flame.visible = false;
@@ -298,7 +307,7 @@ export class FireEscapeEffects {
     this.windowOutline.visible = false;
     for (const {outline} of this.belongingOutlines) outline.visible = false;
     this.alarm.visible = false;
-    this.lens.material.emissive.setHex(0);
+    this.setAlarmGlow(0);
   }
 
   update(story, camera, dt) {
@@ -314,8 +323,7 @@ export class FireEscapeEffects {
     }
     const ringing = story.alarm && alarmTime < 9;
     this.alarm.visible = ringing;
-    this.lens.material.emissive.setHex(ringing ? 0xff3c39 : 0);
-    this.lens.material.emissiveIntensity = ringing ? .24 + .58 * (.5 + .5 * Math.sin(alarmTime * 4.5)) : 0;
+    this.setAlarmGlow(ringing ? .24 + .58 * (.5 + .5 * Math.sin(alarmTime * 4.5)) : 0);
     this.rings.forEach((ring, index) => {
       ring.visible = ringing;
       const wave = (alarmTime / 1.8 + index * .5) % 1;
