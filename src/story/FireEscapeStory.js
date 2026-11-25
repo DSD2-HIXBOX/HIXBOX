@@ -1,6 +1,6 @@
-export const INTRO_SECONDS = 6;
-export const ANNOUNCEMENT_SECONDS = 10;
-export const WINDOW_SECONDS = 1.2;
+export const INTRO_SECONDS = 5;
+export const ANNOUNCEMENT_SECONDS = 8.5;
+export const WINDOW_SECONDS = 1;
 
 export class FireEscapeStory {
   constructor() {

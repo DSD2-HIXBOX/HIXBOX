@@ -7,8 +7,8 @@ export const WINDOW = new THREE.Box3(
 );
 
 export function smokeDensity(elapsed) {
-  return .52 + .55 * THREE.MathUtils.smoothstep(elapsed, 0, 22)
-    + .48 * THREE.MathUtils.smoothstep(elapsed, 8, 75);
+  return .52 + .55 * THREE.MathUtils.smoothstep(elapsed, 0, 17)
+    + .48 * THREE.MathUtils.smoothstep(elapsed, 6, 62);
 }
 
 function frameGlow(width, height) {
@@ -342,7 +342,7 @@ export class FireEscapeEffects {
       const seed = cloud.userData.seed;
       const nearWindow = index < 8;
       const cycle = (seed + time * (.025 + (index % 4) * .003)) % 1;
-      const reach = THREE.MathUtils.lerp(4.5, 11, THREE.MathUtils.smoothstep(time, 0, 64));
+      const reach = THREE.MathUtils.lerp(4.5, 11, THREE.MathUtils.smoothstep(time, 0, 50));
       const z = nearWindow ? -9.65 + cycle * 2.4 : this.sourceDoorZ + cycle * reach;
       const density = THREE.MathUtils.lerp(1, .30, cycle);
       this.cloud(cloud, camera, 39.07 + (index % 6) * .28, 7.05 + seed * 1.3, z,
@@ -352,7 +352,7 @@ export class FireEscapeEffects {
 
     const doorOpening = this.door.progress;
     const inlet = doorOpening > .15 ? doorOpening : story.step === 4 ? .22 : 0;
-    this.indoorTime += dt * inlet;
+    this.indoorTime += dt * inlet * 1.4;
     const fireReveal = story.alarm ? THREE.MathUtils.smoothstep(doorOpening, .28, .85) : 0;
     const flicker = 1.4 + Math.sin(time * 7.7) * .25 + Math.sin(time * 12.3 + 1.5) * .14;
     this.fireLight.intensity = fireReveal * flicker;
